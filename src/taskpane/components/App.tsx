@@ -1,94 +1,63 @@
-import * as React from "react";
-import { DefaultButton } from "@fluentui/react";
-import Header from "./Header";
-import HeroList, { HeroListItem } from "./HeroList";
-import Progress from "./Progress";
-
+import React, { useState, useEffect } from "react";
+import NavBar from "./NavBar";
+import Query from "./Query";
+import IDE from "./IDE";
 /* global console, Excel, require  */
 
-export interface AppProps {
-  title: string;
-  isOfficeInitialized: boolean;
-}
+const click = async () => {
+  try {
+    await Excel.run(async (context) => {
+      /**
+       * Insert your Excel code here
+       */
+      const range = context.workbook.getSelectedRange();
 
-export interface AppState {
-  listItems: HeroListItem[];
-}
+      // Read the range address
+      range.load("address");
 
-export default class App extends React.Component<AppProps, AppState> {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      listItems: [],
-    };
-  }
+      // Update the fill color
+      range.format.fill.color = "yellow";
 
-  componentDidMount() {
-    this.setState({
-      listItems: [
-        {
-          icon: "Ribbon",
-          primaryText: "Achieve more with Office integration",
-        },
-        {
-          icon: "Unlock",
-          primaryText: "Unlock features and functionality",
-        },
-        {
-          icon: "Design",
-          primaryText: "Create and visualize like a pro",
-        },
-      ],
+      await context.sync();
+      console.log(`The range address was ${range.address}.`);
     });
+  } catch (error) {
+    console.error(error);
   }
+};
 
-  click = async () => {
-    try {
-      await Excel.run(async (context) => {
-        /**
-         * Insert your Excel code here
-         */
-        const range = context.workbook.getSelectedRange();
+export default () => {
+  const [page, setPage] = useState('query');
+  let renderThis;
 
-        // Read the range address
-        range.load("address");
+  useEffect(() => {
+    renderThis = <Query />;
+  }, [])
 
-        // Update the fill color
-        range.format.fill.color = "yellow";
-
-        await context.sync();
-        console.log(`The range address was ${range.address}.`);
-      });
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    switch (page) {
+      case 'query':
+        renderThis = <Query />
+        break;
+      case 'ide':
+        renderThis = <IDE />
+        break;
+      case 'b':
+        renderThis = null
+        break;
+      case 'c':
+        renderThis = null
+        break;
+      default:
+        renderThis = null
     }
-  };
+  }, [page])
 
-  render() {
-    const { title, isOfficeInitialized } = this.props;
-
-    if (!isOfficeInitialized) {
-      return (
-        <Progress
-          title={title}
-          logo={require("./../../../assets/logo-filled.png")}
-          message="Please sideload your addin to see app body."
-        />
-      );
-    }
-
-    return (
-      <div className="ms-welcome">
-        <Header logo={require("./../../../assets/logo-filled.png")} title={this.props.title} message="Welcome" />
-        <HeroList message="Discover what Office Add-ins can do for you today!" items={this.state.listItems}>
-          <p className="ms-font-l">
-            Modify the source files, then click <b>Run</b>.
-          </p>
-          <DefaultButton className="ms-welcome__action" iconProps={{ iconName: "ChevronRight" }} onClick={this.click}>
-            Run
-          </DefaultButton>
-        </HeroList>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <NavBar setPage={setPage}/>
+      <IDE />
+      {renderThis}
+    </div>
+  )
 }
