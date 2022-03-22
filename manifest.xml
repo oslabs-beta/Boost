@@ -55,10 +55,10 @@
           <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
 
-            <!-- <CustomTab id="Boost.Tab">
+            <CustomTab id="Boost.Tab">
                 <Group id="Boost.Tab1.Group1">
                   <Label resid="Boost.Tab1.GroupLabel1" />
-                  Required sizes: 16, 32, 80. Optional sizes: 20, 24, 40, 48, 64
+                  <!-- Required sizes: 16, 32, 80. Optional sizes: 20, 24, 40, 48, 64 -->
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16" />
                     <bt:Image size="32" resid="Icon.32x32" />
@@ -82,9 +82,9 @@
                   </Control>
                 </Group>
                 <Label resid="Boost.Tab.TabLabel1" />
-              </CustomTab> -->
+              </CustomTab>
 
-            <OfficeTab id="TabHome">
+            <!-- <OfficeTab id="TabHome">
               <Group id="CommandsGroup">
                 <Label resid="CommandsGroup.Label"/>
                 <Icon>
@@ -109,7 +109,7 @@
                   </Action>
                 </Control>
               </Group>
-            </OfficeTab>
+            </OfficeTab> -->
 
           </ExtensionPoint>
         </DesktopFormFactor>
@@ -133,9 +133,9 @@
         <bt:String id="Functions.Namespace" DefaultValue="Boost"/>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Default Taskpane"/>
 
-        <bt:String id="Boost.Tab.TabLabel1" DefaultValue="Hahahaha"/>
+        <bt:String id="Boost.Tab.TabLabel1" DefaultValue="Boost"/>
         <bt:String id="Boost.Tab1.GroupLabel1" DefaultValue="Commands Group Boost"/>
         <bt:String id="Boost.TaskpaneButton.Label1" DefaultValue="Show Taskpane"/>
       </bt:ShortStrings>
