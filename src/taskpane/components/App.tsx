@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Query from "./Query";
-import IDE from "./IDE";
 /* global console, Excel, require  */
 
 const click = async () => {
@@ -27,37 +26,12 @@ const click = async () => {
 };
 
 export default () => {
-  const [page, setPage] = useState('query');
-  let renderThis;
-
-  useEffect(() => {
-    renderThis = <Query />;
-  }, [])
-
-  useEffect(() => {
-    switch (page) {
-      case 'query':
-        renderThis = <Query />
-        break;
-      case 'ide':
-        renderThis = <IDE />
-        break;
-      case 'b':
-        renderThis = null
-        break;
-      case 'c':
-        renderThis = null
-        break;
-      default:
-        renderThis = null
-    }
-  }, [page])
+  const [page, setPage] = useState(<Query />);
 
   return (
     <div>
       <NavBar setPage={setPage}/>
-      <IDE />
-      {renderThis}
+      {page}
     </div>
   )
 }

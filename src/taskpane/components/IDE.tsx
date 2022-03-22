@@ -1,6 +1,6 @@
 import React from "react";
-import FuncInput from './tsIDE/FuncInput';
-import FuncLibrary from './tsIDE/FuncLibrary';
+import FuncInput from "./ide/FuncInput";
+import FuncLibrary from "./ide/FuncLibrary";
 
 export default () => {
   return (
@@ -8,5 +8,5 @@ export default () => {
       <FuncInput />
       <FuncLibrary />
     </div>
-  )
-}; 
+  );
+};

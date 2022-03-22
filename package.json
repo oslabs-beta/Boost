@@ -1,15 +1,14 @@
 {
-  "name": "office-addin-taskpane-react",
-  "version": "0.0.1",
+  "name": "excel-custom-functions",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OfficeDev/Office-Addin-TaskPane-React.git"
+    "url": "https://github.com/OfficeDev/Excel-Custom-Functions.git"
   },
   "license": "MIT",
-  "config": {
-    "app_to_debug": "excel",
-    "app_type_to_debug": "desktop",
-    "dev_server_port": 3000
+  "engines": {
+    "node": ">=14 <17",
+    "npm": ">=6 <9"
   },
   "scripts": {
     "build": "webpack --mode production",
@@ -18,10 +17,12 @@
     "lint": "office-addin-lint check",
     "lint:fix": "office-addin-lint fix",
     "prettier": "office-addin-lint prettier",
-    "start": "office-addin-debugging start manifest.xml",
+    "start": "npm run build & office-addin-debugging start manifest.xml",
     "start:desktop": "office-addin-debugging start manifest.xml desktop",
     "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
+    "test:e2e": "mocha -r ts-node/register test/end-to-end/*.ts",
+    "test:unit": "mocha -r ts-node/register test/unit/*.test.ts",
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
   },
@@ -34,26 +35,19 @@
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
+    "@babel/core": "^7.13.16",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/custom-functions-runtime": "^1.6.0",
     "@types/office-js": "^1.0.180",
     "@types/office-runtime": "^1.0.17",
-    "@types/react": "^16.8.22",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-hot-loader": "^4.1.0",
-    "@types/webpack": "^4.4.34",
-    "@types/webpack-dev-server": "^4.1.0",
     "acorn": "^8.5.0",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.1",
-    "eslint": "^7.20.0",
+    "custom-functions-metadata-plugin": "^1.2.5",
     "eslint-plugin-office-addins": "^2.0.0",
-    "eslint-plugin-react": "^7.16.0",
     "file-loader": "^6.2.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
-    "less": "^3.9.0",
-    "less-loader": "^10.0.1",
     "office-addin-cli": "^1.3.5",
     "office-addin-debugging": "^4.3.8",
     "office-addin-dev-certs": "^1.7.7",
@@ -62,12 +56,22 @@
     "office-addin-prettier-config": "^1.1.4",
     "os-browserify": "^0.3.0",
     "process": "^0.11.10",
+    "request": "^2.88.2",
     "source-map-loader": "^3.0.0",
     "ts-loader": "^9.2.5",
     "typescript": "^4.3.5",
     "webpack": "^5.50.0",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "4.7.3"
+    "webpack-dev-server": "4.7.3",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-hot-loader": "^4.1.0",
+    "@types/webpack": "^4.4.34",
+    "@types/webpack-dev-server": "^4.1.0",
+    "eslint": "^7.20.0",
+    "eslint-plugin-react": "^7.16.0",
+    "less": "^3.9.0",
+    "less-loader": "^10.0.1"
   },
   "prettier": "office-addin-prettier-config",
   "browserslist": [
