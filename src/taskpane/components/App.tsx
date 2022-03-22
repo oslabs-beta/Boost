@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Query from "./Query";
 /* global console, Excel, require  */
@@ -26,7 +26,7 @@ const click = async () => {
 };
 
 export default () => {
-  const [page, setPage] = useState('query');
+  const [page, setPage] = useState(<Query />);
 
   return (
     <div>

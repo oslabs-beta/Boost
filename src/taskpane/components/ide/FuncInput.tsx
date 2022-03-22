@@ -1,10 +1,10 @@
 import React from "react";
 
-export default ()=> {
+export default () => {
   return (
     <> 
-    <textarea>TS Input</textarea>
-    <button>SAVE</button>
+      <textarea>TS Input</textarea>
+      <button>SAVE</button>
     </>
-    )
-}
+    );
+};
