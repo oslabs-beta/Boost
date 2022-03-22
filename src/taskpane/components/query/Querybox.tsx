@@ -2,14 +2,14 @@ import React from "react";
 
 export default () => {
   const onSubmit = () => {
-    console.log('submit was clicked'); 
-  }
+    console.log("submit was clicked");
+    // document.getElementById('sqlQueryBox').value;
+  };
 
   return (
     <>
-      <textarea>Enter SQL Query</textarea> 
-      <button onClick={onSubmit}>Submit</button> 
+      <textarea id="sqlQueryBox" placeholder="Enter SQL Query"></textarea>
+      <button onClick={onSubmit}>Submit</button>
     </>
-  )
-    
-}
+  );
+};

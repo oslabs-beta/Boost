@@ -2,16 +2,21 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
   <Id>3bdda3cc-a36f-4ecc-9727-f12dc4361b36</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Contoso</ProviderName>
+  <ProviderName>Boost</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Boost"/>
-  <Description DefaultValue="Write your own Excel functions in TypeScript."/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
+  <Description DefaultValue="Dev tool for typescript developers who utilize excel"/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/boost-icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/boost-icon-64.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
-  <AppDomains>
+<!-- AppDomains
+  Domains in addition to the SourceLocation (a few lines below) that the add in will use to load pages
+  Also lists trusted domains from which API cals can be made
+  Specify a new AppDomain element for each domain -->
+  
+  <!-- <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>
-  </AppDomains>
+  </AppDomains> -->
   <Hosts>
     <Host Name="Workbook"/>
   </Hosts>
@@ -49,6 +54,36 @@
           </GetStarted>
           <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
+
+            <!-- <CustomTab id="Boost.Tab">
+                <Group id="Boost.Tab1.Group1">
+                  <Label resid="Boost.Tab1.GroupLabel1" />
+                  Required sizes: 16, 32, 80. Optional sizes: 20, 24, 40, 48, 64
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
+                  </Icon>
+                  <Control xsi:type="Button" id="Boost.TaskpaneButton">
+                    <Label resid="Boost.TaskpaneButton.Label1" />
+                    <Supertip>
+                      <Title resid="Boost.TaskpaneButton.Label1" />
+                      <Description resid="Boost.TaskpaneButton.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>ButtonId1</TaskpaneId>
+                      <SourceLocation resid="Taskpane.Url" />
+                    </Action>
+                  </Control>
+                </Group>
+                <Label resid="Boost.Tab.TabLabel1" />
+              </CustomTab> -->
+
             <OfficeTab id="TabHome">
               <Group id="CommandsGroup">
                 <Label resid="CommandsGroup.Label"/>
@@ -75,15 +110,16 @@
                 </Control>
               </Group>
             </OfficeTab>
+
           </ExtensionPoint>
         </DesktopFormFactor>
       </Host>
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/boost-icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/boost-icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/boost-icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3000/dist/functions.js"/>
@@ -94,14 +130,19 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="Functions.Namespace" DefaultValue="TEAM BOOST"/>
+        <bt:String id="Functions.Namespace" DefaultValue="Boost"/>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="HELLO TOMATO"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
+
+        <bt:String id="Boost.Tab.TabLabel1" DefaultValue="Hahahaha"/>
+        <bt:String id="Boost.Tab1.GroupLabel1" DefaultValue="Commands Group Boost"/>
+        <bt:String id="Boost.TaskpaneButton.Label1" DefaultValue="Show Taskpane"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show Taskpane" />
+        <bt:String id="Boost.TaskpaneButton.Tooltip" DefaultValue="Click to Show Boost Taskpane"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
