@@ -5,7 +5,7 @@ export default () => {
     <table>
       <tr>
         <th>Hello</th>
-        <th>there</th>
+        <th>there,</th>
         <th>Boost</th>
       </tr>
       <tr>

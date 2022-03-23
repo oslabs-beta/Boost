@@ -3,8 +3,11 @@ import * as excelFuncs from "../../../excelFunction";
 
 /* global console Excel*/
 
+/* global console, document, Excel */
+
 export default () => {
   const onSubmit = async () => {
+
     await Excel.run(async (context) => {
       let sheet: any = excelFuncs.getSheet(context);
       sheet.load("name"); // getname of the active worksheet
@@ -47,6 +50,7 @@ export default () => {
 
     //   await context.sync();
     // });
+  
   };
 
   return (
