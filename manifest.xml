@@ -56,33 +56,33 @@
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
 
             <CustomTab id="Boost.Tab">
-                <Group id="Boost.Tab1.Group1">
-                  <Label resid="Boost.Tab1.GroupLabel1" />
-                  <!-- Required sizes: 16, 32, 80. Optional sizes: 20, 24, 40, 48, 64 -->
+              <Group id="Boost.Tab1.Group1">
+                <Label resid="Boost.Tab1.GroupLabel1" />
+                <!-- Required sizes: 16, 32, 80. Optional sizes: 20, 24, 40, 48, 64 -->
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
+                <Control xsi:type="Button" id="Boost.TaskpaneButton">
+                  <Label resid="Boost.TaskpaneButton.Label1" />
+                  <Supertip>
+                    <Title resid="Boost.TaskpaneButton.Label1" />
+                    <Description resid="Boost.TaskpaneButton.Tooltip" />
+                  </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16" />
                     <bt:Image size="32" resid="Icon.32x32" />
                     <bt:Image size="80" resid="Icon.80x80" />
                   </Icon>
-                  <Control xsi:type="Button" id="Boost.TaskpaneButton">
-                    <Label resid="Boost.TaskpaneButton.Label1" />
-                    <Supertip>
-                      <Title resid="Boost.TaskpaneButton.Label1" />
-                      <Description resid="Boost.TaskpaneButton.Tooltip" />
-                    </Supertip>
-                    <Icon>
-                      <bt:Image size="16" resid="Icon.16x16" />
-                      <bt:Image size="32" resid="Icon.32x32" />
-                      <bt:Image size="80" resid="Icon.80x80" />
-                    </Icon>
-                    <Action xsi:type="ShowTaskpane">
-                      <TaskpaneId>ButtonId1</TaskpaneId>
-                      <SourceLocation resid="Taskpane.Url" />
-                    </Action>
-                  </Control>
-                </Group>
-                <Label resid="Boost.Tab.TabLabel1" />
-              </CustomTab>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url" />
+                  </Action>
+                </Control>
+              </Group>
+              <Label resid="Boost.Tab.TabLabel1" />
+            </CustomTab>
 
             <!-- <OfficeTab id="TabHome">
               <Group id="CommandsGroup">
