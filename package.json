@@ -24,7 +24,8 @@
     "test:e2e": "mocha -r ts-node/register test/end-to-end/*.ts",
     "test:unit": "mocha -r ts-node/register test/unit/*.test.ts",
     "validate": "office-addin-manifest validate manifest.xml",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "dependencies": {
     "@fluentui/react": "^8.34.0",
@@ -33,6 +34,8 @@
     "pg": "^8.7.3",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
+    "react-hot-loader": "^4.13.0",
+    "react-table": "^7.7.0",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
@@ -56,6 +59,7 @@
     "file-loader": "^6.2.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
+    "jsdoc": "^3.6.10",
     "less": "^3.9.0",
     "less-loader": "^10.0.1",
     "office-addin-cli": "^1.3.5",

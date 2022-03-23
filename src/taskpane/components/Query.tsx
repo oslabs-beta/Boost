@@ -1,11 +1,11 @@
 import React from "react";
-import QueryBox from "./query/QueryBox";
+import Querybox from "./query/Querybox";
 import QueryTable from "./query/QueryTable";
 
 export default () => {
   return (
     <div>
-      <QueryBox />
+      <Querybox />
       <QueryTable />
 
       <button>CLEAR</button>
