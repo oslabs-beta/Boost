@@ -1,2 +1,2 @@
 # Boost
-Excel add in
+Excel Plug-in
