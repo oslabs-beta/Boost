@@ -10,9 +10,9 @@ export default () => {
       </tr>
       <tr>
         <td>A1</td>
-        <td>B1</td> 
+        <td>B1</td>
         <td>C1</td>
       </tr>
     </table>
-  )
-}
+  );
+};
