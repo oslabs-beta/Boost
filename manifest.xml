@@ -57,7 +57,8 @@
 
             <CustomTab id="Boost.Tab">
               <Group id="Boost.Tab1.Group1">
-                <Label resid="Boost.Tab1.GroupLabel1" />
+                <Label resid="Boost.Tab.GroupLabel1" />
+
                 <!-- Required sizes: 16, 32, 80. Optional sizes: 20, 24, 40, 48, 64 -->
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16" />
@@ -137,7 +138,7 @@
 
         <bt:String id="Boost.Tab.TabLabel1" DefaultValue="Boost"/>
         <bt:String id="Boost.Tab1.GroupLabel1" DefaultValue="Commands Group Boost"/>
-        <bt:String id="Boost.TaskpaneButton.Label1" DefaultValue="Show Taskpane"/>
+        <bt:String id="Boost.TaskpaneButton.Label1" DefaultValue="Show BOOST"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>

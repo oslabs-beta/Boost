@@ -1,13 +1,12 @@
 import React from "react";
 import AddDatabase from "./database/AddDatabase";
-import DataBaseSchema from "./database/DataBaseSchema";
+import DatabaseSchema from "./database/DatabaseSchema";
 
 export default () => {
-    return (
-        <>
-        <AddDatabase/> 
-        <DataBaseSchema/> 
-        </>
-    )
-
-}
+  return (
+    <>
+      <AddDatabase />
+      <DatabaseSchema />
+    </>
+  );
+};
