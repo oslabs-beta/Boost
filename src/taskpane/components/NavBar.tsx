@@ -3,7 +3,7 @@ import Query from "./Query";
 import IDE from "./IDE";
 import Database from "./Database";
 
-export default (props) => {
+export default (props: any) => {
   const { setPage } = props;
 
   return (
