@@ -3,8 +3,8 @@ import React from "react";
 export default () => {
   return (
     <>
-      <textarea>TS Input</textarea>
+      <textarea placeholder="Enter TS Function"></textarea>
       <button>SAVE</button>
     </>
-    );
+  );
 };
