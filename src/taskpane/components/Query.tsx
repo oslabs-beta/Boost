@@ -41,6 +41,7 @@ export default () => {
       // const load = sheet.getUsedRange().getRow(2);
       // const range: any = sheet.getUsedRange();
 
+      // NOTE: Need to update this, currently needs an address
       const range: any = sheet.getRange((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
       range.load("address");
       range.load("values");
