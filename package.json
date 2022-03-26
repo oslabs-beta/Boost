@@ -31,6 +31,7 @@
     "@fluentui/react": "^8.34.0",
     "@types/react-table": "^7.7.10",
     "core-js": "^3.9.1",
+    "css-loader": "^6.7.1",
     "es6-promise": "^4.2.8",
     "node-sql-parser": "^4.3.0",
     "pg": "^8.7.3",
@@ -38,7 +39,8 @@
     "react-dom": "^16.8.2",
     "react-hot-loader": "^4.13.0",
     "react-table": "^7.7.0",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
