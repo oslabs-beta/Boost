@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Parser } from "node-sql-parser"
 import Querybox from "./query/Querybox";
 import QueryTable from "./query/QueryTable";
+import queryParser from "./query/queryParser";
 import * as excelFuncs from "../../excelFunction";
 
 /* global Excel console document */
@@ -17,10 +19,19 @@ export default (): JSX.Element => {
       const sheet: Excel.Worksheet = excelFuncs.getSheet(context);
       sheet.load("name"); // getname of the active worksheet
 
-      // sheet.getUsedRange().load() gives us the cells that are being used
+      const range = sheet.getUsedRange() // gives us the cells that are being used
 
       // NOTE: Needs to accept SQL queries, currently reqires an excel address
-      const range = sheet.getRange((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
+      // const range = sheet.getRange("A1:F3");
+
+      const parser = new Parser();
+      try {
+        const {ast} = parser.parse((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
+        queryParser(ast);
+      } catch(err) {
+        console.log('Invalid query')
+      }
+      
       range.load("address");
       range.load("values");
 
