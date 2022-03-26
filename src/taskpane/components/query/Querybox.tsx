@@ -24,6 +24,8 @@ export default (props: QueryBoxProps): JSX.Element => {
   //   await context.sync();
   // });
 
+
+
   return (
     <>
       <textarea id="sqlQueryBox" placeholder="Enter SQL Query"></textarea>

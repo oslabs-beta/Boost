@@ -8,7 +8,7 @@
   <Description DefaultValue="Dev tool for typescript developers who utilize excel"/>
   <IconUrl DefaultValue="https://localhost:3000/assets/boost-icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/boost-icon-64.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <SupportUrl DefaultValue="https://github.com/oslabs-beta/Boost/issues"/>
 <!-- AppDomains
   Domains in addition to the SourceLocation (a few lines below) that the add in will use to load pages
   Also lists trusted domains from which API cals can be made

@@ -14,6 +14,7 @@
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "dev-server": "webpack serve --mode development",
+    "doc": "jsdoc -c jsdoc.json",
     "lint": "office-addin-lint check",
     "lint:fix": "office-addin-lint fix",
     "prettier": "office-addin-lint prettier",
@@ -24,14 +25,14 @@
     "test:e2e": "mocha -r ts-node/register test/end-to-end/*.ts",
     "test:unit": "mocha -r ts-node/register test/unit/*.test.ts",
     "validate": "office-addin-manifest validate manifest.xml",
-    "watch": "webpack --mode development --watch",
-    "doc": "jsdoc -c jsdoc.json"
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "@fluentui/react": "^8.34.0",
     "@types/react-table": "^7.7.10",
     "core-js": "^3.9.1",
     "es6-promise": "^4.2.8",
+    "node-sql-parser": "^4.3.0",
     "pg": "^8.7.3",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
@@ -45,7 +46,7 @@
     "@types/custom-functions-runtime": "^1.6.0",
     "@types/office-js": "^1.0.180",
     "@types/office-runtime": "^1.0.17",
-    "@types/react": "^16.8.22",
+    "@types/react": "^16.14.24",
     "@types/react-dom": "^16.8.4",
     "@types/react-hot-loader": "^4.1.0",
     "@types/webpack": "^4.4.34",

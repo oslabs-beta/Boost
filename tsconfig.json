@@ -6,6 +6,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
+    "moduleResolution": "node",
     "noEmitOnError": true,
     // "noImplicitAny": false,
     "outDir": "lib",
