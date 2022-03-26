@@ -6,9 +6,9 @@ import ReactDOM from "react-dom";
 
 // initializeIcons();
 
-let isOfficeInitialized = false;
+let isOfficeInitialized: boolean = false;
 
-const title = "Contoso Task Pane Add-in";
+const title: string = "Boost Task Pane Add-in";
 
 const render = (Component: any) => {
   ReactDOM.render(

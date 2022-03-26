@@ -3,7 +3,7 @@
  * @param {object}
  * @return {object}
  */
-export const getSheet = (context) => {
+export const getSheet = (context: Excel.RequestContext): Excel.Worksheet => {
   return context.workbook.worksheets.getActiveWorksheet();
 };
 
@@ -12,9 +12,7 @@ export const getSheet = (context) => {
  * @param {object}
  * @return {object}
  */
-export const selectRange = (range) => {
-  range.select();
-};
+export const selectRange = (range: Excel.Range): void => range.select();
 
 /**
  * selects all the cells that are filled
