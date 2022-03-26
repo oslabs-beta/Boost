@@ -5,56 +5,30 @@ import * as excelFuncs from "../../excelFunction";
 
 /* global Excel console document */
 
-export default () => {
-  const [stateRange, setStateRange] = useState([[]]);
-  const [columns, setColumns] = useState([
-    {
-      Header: "field_1",
-      accessor: "0",
-    },
-    {
-      Header: "field_2",
-      accessor: "1",
-    },
-    {
-      Header: "field_3",
-      accessor: "2",
-    },
-    {
-      Header: "field_4",
-      accessor: "3",
-    },
-    {
-      Header: "field_5",
-      accessor: "4",
-    },
-  ]);
-  // const columns = useMemo(() => COLUMNS, [COLUMNS]);
-  const data = useMemo(() => stateRange.slice(1), [stateRange]);
+export default (): JSX.Element => {
+  const [stateRange, setStateRange] = useState<string[][]>([[]]);
+  const [columns, setColumns] = useState<any>([]);
 
-  const onSubmit = async () => {
-    await Excel.run(async (context) => {
-      let sheet: any = excelFuncs.getSheet(context);
+  // We want to be able to useMemo for the columns as well
+  const data: string[][] = useMemo(() => stateRange.slice(1), [stateRange]);
+
+  const onSubmit = async (): Promise<void> => {
+    await Excel.run(async (context: Excel.RequestContext): Promise<void> => {
+      const sheet: Excel.Worksheet = excelFuncs.getSheet(context);
       sheet.load("name"); // getname of the active worksheet
 
       // sheet.getUsedRange().load() gives us the cells that are being used
-      // const load = sheet.getUsedRange().getRow(2);
-      // const range: any = sheet.getUsedRange();
 
-      // NOTE: Need to update this, currently needs an address
-      const range: any = sheet.getRange((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
+      // NOTE: Needs to accept SQL queries, currently reqires an excel address
+      const range = sheet.getRange((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
       range.load("address");
       range.load("values");
 
-      // used to navigate you to the select range
       excelFuncs.selectRange(range);
 
       await context.sync();
+
       setStateRange(range.values);
-      console.log(range.values);
-      // console.log("test:", load);
-      // console.log("test2:", range);
-      // console.log(`The active worksheet is "${sheet.name}"`);
     });
   };
 

@@ -1,6 +1,7 @@
 import React from "react";
+import { QueryBoxProps } from "src/types";
 
-export default (props: any) => {
+export default (props: QueryBoxProps): JSX.Element => {
   // console.log("submit was clicked");
   // // console.log((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
 

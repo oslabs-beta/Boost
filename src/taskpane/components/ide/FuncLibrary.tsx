@@ -1,5 +1,5 @@
 import React from "react";
 
-export default () => {
+export default (): JSX.Element => {
   return <div>LIBRARY</div>;
 };

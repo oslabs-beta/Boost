@@ -5,8 +5,8 @@ export default (props: any) => {
   const { columns, data } = props;
 
   const tableInstance = useTable({
-    columns: columns,
-    data: data,
+    columns,
+    data,
   });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
