@@ -4,7 +4,7 @@ import Querybox from "./query/Querybox";
 import QueryTable from "./query/QueryTable";
 import queryParser from "./query/queryParser";
 import * as excelFuncs from "../../excelFunction";
-
+import { ColumnFilter } from "./query/ColumnFilter";
 /* global Excel JSX console document */
 //HELLOOOO
 export default (): JSX.Element => {
@@ -49,7 +49,7 @@ export default (): JSX.Element => {
   useEffect(() => {
     setColumns(
       stateRange[0].map((column: string, i: number) => {
-        return { Header: column, accessor: `${i}` };
+        return { Header: column, accessor: `${i}`, Filter: ColumnFilter };
       })
     );
   }, [stateRange]);

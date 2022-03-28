@@ -1,6 +1,7 @@
 import React from "react";
-import { useTable, useGlobalFilter } from "react-table";
+import { useTable, useGlobalFilter, useFilters } from "react-table";
 import { GlobalFilter } from "./GlobalFilter";
+import { ColumnFilter } from "./ColumnFilter";
 
 export default (props: any) => {
   const { columns, data } = props;
@@ -10,6 +11,7 @@ export default (props: any) => {
       columns,
       data,
     },
+    useFilters,
     useGlobalFilter
   );
 
@@ -25,7 +27,9 @@ export default (props: any) => {
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps()}>{column.render("Header")}
+                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                </th>
               ))}
             </tr>
           ))}
