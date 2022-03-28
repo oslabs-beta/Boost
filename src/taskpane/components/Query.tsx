@@ -6,9 +6,10 @@ import queryParser from "./query/queryParser";
 import * as excelFuncs from "../../excelFunction";
 import { ColumnFilter } from "./query/ColumnFilter";
 /* global Excel JSX console document */
-//HELLOOOO
+
 export default (): JSX.Element => {
   const [stateRange, setStateRange] = useState<string[][]>([[]]);
+  const [HEADERS, setHEADERS] = useState([]);
   const [columns, setColumns] = useState<any>([]);
   const [showTable, setShowTable] = useState(false);
 
@@ -28,11 +29,11 @@ export default (): JSX.Element => {
       const parser = new Parser();
       try {
         const { ast } = parser.parse((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
-        queryParser(ast);
+        queryParser(ast, HEADERS);
         excelFuncs.selectRange(range);
         setShowTable(true);
       } catch (err) {
-        console.log("Invalid query");
+        console.log("Invalid query:", err);
         setShowTable(false);
         (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "invalid query!";
       }
@@ -45,6 +46,20 @@ export default (): JSX.Element => {
       setStateRange(range.values);
     });
   };
+
+  useEffect(() => {
+    const onLoad = async (): Promise<void> => {
+      await Excel.run(async (context: Excel.RequestContext): Promise<void> => {
+        const sheet: Excel.Worksheet = excelFuncs.getSheet(context);
+        const range: any = sheet.getUsedRange();
+        range.load("values");
+        await context.sync();
+        setHEADERS(range.values[0]);
+      });
+    };
+
+    onLoad();
+  }, []);
 
   useEffect(() => {
     setColumns(
