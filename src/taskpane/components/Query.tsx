@@ -29,13 +29,13 @@ export default (): JSX.Element => {
       const parser = new Parser();
       try {
         const { ast } = parser.parse((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
-        queryParser(ast, HEADERS);
+        queryParser(ast, HEADERS, setColumns);
         excelFuncs.selectRange(range);
         setShowTable(true);
       } catch (err) {
         console.log("Invalid query:", err);
         setShowTable(false);
-        (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "invalid query!";
+        // (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "invalid query!";
       }
 
       range.load("address");
@@ -54,20 +54,26 @@ export default (): JSX.Element => {
         const range: any = sheet.getUsedRange();
         range.load("values");
         await context.sync();
-        setHEADERS(range.values[0]);
+        // range.values[0] is the headers from the spreadsheet
+        // we are creating an array of objects which has the same formatting as react-table
+        setHEADERS(
+          range.values[0].map((column: string, i: number) => {
+            return { Header: column, accessor: `${i}`, Filter: ColumnFilter };
+          })
+        );
       });
     };
 
     onLoad();
   }, []);
 
-  useEffect(() => {
-    setColumns(
-      stateRange[0].map((column: string, i: number) => {
-        return { Header: column, accessor: `${i}`, Filter: ColumnFilter };
-      })
-    );
-  }, [stateRange]);
+  // useEffect(() => {
+  //   setColumns(
+  //     stateRange[0].map((column: string, i: number) => {
+  //       return { Header: column, accessor: `${i}`, Filter: ColumnFilter };
+  //     })
+  //   );
+  // }, [stateRange]);
 
   return (
     <div>

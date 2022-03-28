@@ -1,12 +1,13 @@
-/* global console */
+import { ColumnFilter } from "./ColumnFilter";
+/* global console Excel */
 
-export default (ast: any, columns: any) => {
+export default (ast: any, columns: any, setColumns: any) => {
   // ast will be an array if the sql query ends in a semi colon or there are multiple queries
   if (Array.isArray(ast)) ast = ast[0];
 
   switch (ast.type) {
     case "select":
-      handleSelect(ast, columns);
+      handleSelect(ast, columns, setColumns);
       break;
   }
 };
@@ -17,29 +18,39 @@ ast = { columns: is “*” or array of objects [ {as : null ]}, { expr: { colum
 
 */
 
-const handleSelect = (ast: any, columns: any) => {
+const handleSelect = async (ast: any, columns: any, setColumns: any) => {
   // console.log("Handling select:", ast);
 
   if (ast.columns === "*") {
-    console.log("Select all columns");
+    setColumns(columns);
   } else {
-    for (const search of ast.columns) {
-      console.log(
-        "filtered header: ",
-        columns.filter((header: any) => {
-          console.log("header:", header);
-          console.log("column:", search.expr.column);
-          return header === search.expr.column;
-        })
-      );
-      console.log("columns:", search.expr.column); // get the columns
+    const arr = [];
+
+    for (let i = 0; i < columns.length; i++) {
+      for (const obj of ast.columns) {
+        if (obj.expr.column === columns[i].Header) {
+          arr.push({ Header: columns[i].Header, accessor: `${i}`, Filter: ColumnFilter });
+          break;
+        }
+      }
     }
+    setColumns(arr);
   }
 
-  // console.log("WHERE: ");
-  // if (ast.where) {
-  //   console.log(ast.where.left);
-  //   console.log(ast.where.operator);
-  //   console.log(ast.where.right);
-  // }
+  await Excel.run(async (context: Excel.RequestContext) => {
+    let sheets = context.workbook.worksheets;
+    sheets.load("items/name");
+
+    await context.sync();
+
+    if (sheets.items.length > 1) {
+      console.log(`There are ${sheets.items.length} worksheets in the workbook:`);
+    } else {
+      console.log(`There is one worksheet in the workbook:`);
+    }
+
+    sheets.items.forEach(function (sheet) {
+      console.log("Sheet name", sheet.name);
+    });
+  });
 };
