@@ -49,8 +49,15 @@ const handleSelect = async (ast: any, columns: any, setColumns: any) => {
       console.log(`There is one worksheet in the workbook:`);
     }
 
-    sheets.items.forEach(function (sheet) {
+    const sheetArray: any = [];
+
+    for (const sheet of sheets.items) {
       console.log("Sheet name", sheet.name);
-    });
+      const curRange = sheet.getUsedRange();
+      curRange.load("values");
+      await context.sync();
+      sheetArray.push(curRange.values);
+      console.log(sheetArray);
+    }
   });
 };

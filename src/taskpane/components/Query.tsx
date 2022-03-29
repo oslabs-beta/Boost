@@ -7,6 +7,75 @@ import * as excelFuncs from "../../excelFunction";
 import { ColumnFilter } from "./query/ColumnFilter";
 /* global Excel JSX console document */
 
+export const QueryRefactored = (): JSX.Element => {
+  const [allWorksheets, setAllWorksheets] = useState({});
+
+  const reloadSheets = async () => {
+    await Excel.run(async (context: Excel.RequestContext): Promise<void> => {
+
+      /**
+       * Variable sheets contains all sheets in big nested object
+       */
+      let sheets: any = context.workbook.worksheets;
+
+      /**
+       * Loads items(contents of sheets) and title of worksheet
+       * item (everything on the sheet)/ name (name of the sheet)
+       */
+      sheets.load("items/name");
+      await context.sync();
+
+      /**
+       * TYPES FOR Worksheet Object
+       */
+      type headerType = {
+        Header: string;
+        Accessor: string;
+        Filter: any;
+      };
+
+      type sheetInfo = {
+        headerInfo?: headerType[];
+        data?: string[];
+      };
+
+      type newSheet = {
+        [key: string]: sheetInfo;
+      };
+
+      const newWorksheet: newSheet = {};
+
+      for (const sheet of sheets.items) {
+        const range: any = sheet.getUsedRange();
+        range.load("values");
+        await context.sync();
+
+        const headerArray = range.values[0].map((column: string, i: number) => {
+          return { Header: column, accessor: `${i}`, Filter: ColumnFilter };
+        });
+
+        const dataArray = range.values.slice(1);
+        console.log("data", dataArray);
+
+        console.log("header:", headerArray);
+
+        sheet.load("name");
+        newWorksheet[sheet.name] = {
+          headerInfo: headerArray,
+          data: [],
+        };
+      }
+      //{ Header: column, accessor: `${i}`, Filter: ColumnFilter };
+
+      console.log(newWorksheet);
+    });
+    // setAllWorksheets();
+  };
+  reloadSheets();
+
+  return <div>Hello</div>;
+};
+
 export default (): JSX.Element => {
   const [stateRange, setStateRange] = useState<string[][]>([[]]);
   const [HEADERS, setHEADERS] = useState([]);
@@ -30,7 +99,7 @@ export default (): JSX.Element => {
       try {
         const { ast } = parser.parse((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
         queryParser(ast, HEADERS, setColumns);
-        excelFuncs.selectRange(range);
+        // excelFuncs.selectRange(range);
         setShowTable(true);
       } catch (err) {
         console.log("Invalid query:", err);
