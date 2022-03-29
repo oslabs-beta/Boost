@@ -8,7 +8,6 @@ type astType = {
   orderby: any;
   having: any;
 };
-
 /**
  * Get all headers selected in the query
  */
