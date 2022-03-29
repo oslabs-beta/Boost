@@ -9,6 +9,7 @@ type astType = {
   having: any;
 };
 
+
 /**
  * Get all headers selected in the query
  */
