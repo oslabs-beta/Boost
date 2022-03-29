@@ -1,5 +1,7 @@
 /* global  console */
-
+/**
+ * setting the types for the result of the AST parser
+ */
 type astType = {
   columns: any;
   from: any;
@@ -9,16 +11,24 @@ type astType = {
   having: any;
 };
 
-
 /**
- * Get all headers selected in the query
+ * returns the selected headers and selected conditions of the query (i.e. WHERE, FROM, GROUPBY, ORDER_By)
  */
 export default ({ columns, from, where, groupby, orderby, having }: astType, allWorksheets: any) => {
   // get the headers for the tables that are requested in FROM arguments
+  /**
+   * Populating queryHeaders with all the selected column names/ headers
+   * an array of objects that has the column name, accessor and Filter: ColumnFilter (built-in from react table)
+   * ex.) { Header: column, accessor: `${accessorValue++}`, Filter: ColumnFilter };
+   */
   let queryHeaders: any = [];
 
   // Create an object will to hold requested columns with O(1) lookup time
+  /**
+   * Creating an object with all headers if SELECT *
+   */
   const objWithColumns: any = {};
+
   if (columns === "*") {
     objWithColumns["*"] = true;
   } else {
@@ -26,12 +36,18 @@ export default ({ columns, from, where, groupby, orderby, having }: astType, all
       objWithColumns[column.expr.column] = true;
     }
   }
-  
+
+  /**
+   * destructuring fromObj to get the worksheet names (.table is worksheet name)
+   * reformatting AST data for use in react-table
+   */
   for (const fromObj of from) {
     // make sure that the table they are looking for is in
     if (allWorksheets[fromObj.table]) {
       const headersArray = allWorksheets[fromObj.table].headerInfo;
-
+      /**
+       * checking if SELECT * exists in objWithColumns, we are selecting all the headers
+       */
       if (objWithColumns["*"]) {
         queryHeaders = queryHeaders.concat(headersArray);
       } else {
@@ -39,17 +55,19 @@ export default ({ columns, from, where, groupby, orderby, having }: astType, all
           if (objWithColumns[headerInfo.Header]) queryHeaders.push(headerInfo);
         }
       }
+    } else {
+      //error handling for if the table they requested isn't in the worksheets
     }
   }
 
   // here is only 1 condition then return it in an array
-  let queryConditions = {
+  const queryConditions = {
     where: [where],
     groupby: groupby,
     orderby: orderby,
     having: having,
   };
-  if (where?.value) queryConditions = where.value;
+  if (queryConditions.where[0]?.value) queryConditions.where = where.value;
 
   console.log("headers, conditions", queryHeaders, queryConditions);
 
