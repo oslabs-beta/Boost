@@ -1,3 +1,5 @@
+/* global Excel */
+
 /**
  * Get the active worksheet
  * @param {object}
