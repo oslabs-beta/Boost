@@ -9,11 +9,14 @@ import reloadSheets from "./query/queryFunctions/reloadSheets";
 
 /* global Excel JSX console document */
 
-export const QueryRefactored = (): JSX.Element => {
+export default (): JSX.Element => {
   const [allWorksheets, setAllWorksheets] = useState({});
   const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
+    /**
+     * Loads Current sheets and sets current state
+     */
     const getSheet = async () => {
       return await reloadSheets();
     };
@@ -23,14 +26,25 @@ export const QueryRefactored = (): JSX.Element => {
 
   const onSubmit = async () => {
     console.log(`submit button was pressed`);
-    const thiss = await allWorksheets;
-    await console.log(thiss);
+    const parser = new Parser();
+    const { ast } = parser.parse((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
+    console.log("ast:", ast);
+    // ast.from is an array of objects ast.from [{table:"table_name1"}, {table:"table_name2"}]
+
   };
 
+  // try {
+  //   const { ast } = parser.parse((document.getElementById("sqlQueryBox") as HTMLInputElement).value);
+  //   // queryParser(ast, HEADERS, setColumns);
+  //   setShowTable(true);
+  // } catch (err) {
+  //   console.log("Invalid query:", err);
+  //   setShowTable(false);
+  //   // (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "invalid query!";
+  // }
+
   return (
-    <button onClick={onSubmit}>Submit</button>
-    // <div>
-    //   <Querybox onSubmit={onSubmit} />
+    <Querybox onSubmit={onSubmit} />
 
     //   {showTable ? <QueryTable columns={columns} data={data} /> : null}
     //   <button
@@ -47,7 +61,7 @@ export const QueryRefactored = (): JSX.Element => {
 };
 
 /* OLD QUERY - ONCE REFACTORED, WE WILL REMOVE */
-export default (): JSX.Element => {
+export const name = (): JSX.Element => {
   const [stateRange, setStateRange] = useState<string[][]>([[]]);
   const [HEADERS, setHEADERS] = useState([]);
   const [columns, setColumns] = useState<any>([]);
