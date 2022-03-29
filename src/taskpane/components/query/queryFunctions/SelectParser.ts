@@ -9,23 +9,26 @@ type astType = {
  * Get all headers selected in the query
  */
 export default ({ columns, from }: astType, allWorksheets: any) => {
-  const objWithColumns: any = {};
-
-  // Create an object will all requested columns if it is not *
-  if (columns !== '*') {
-    for (const column of columns) {
-      objWithColumns[column.expr.column] = true;
-    }
-  }
-
+  // return all headers from all worksheets
+  if (columns === '*') return Object.values(allWorksheets).reduce((prev: any, cur: any) => prev.concat(cur.headerInfo), [])
+  
   // get the headers for the tables that are requested in FROM arguments
   const headers: any = [];
+
+  // Create an object will all requested columns if it is not *
+  const objWithColumns: any = {};
+  for (const column of columns) {
+    objWithColumns[column.expr.column] = true;
+  }
+
+
 
   for (const fromObj of from) {
     // make sure that the table they are looking for is in 
     if (allWorksheets[fromObj.table]) {
       const headersArray = allWorksheets[fromObj.table].headerInfo
       console.log('headers array', headersArray);
+
       for (const headerInfo of headersArray) {
         if (objWithColumns[headerInfo.Header]) headers.push(headerInfo)
       }

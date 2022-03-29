@@ -10,19 +10,22 @@ import handleQuery from "./query/queryFunctions/handleQuery";
 
 export default (): JSX.Element => {
   const [allWorksheets, setAllWorksheets] = useState({});
-  const [activeColumns, setActiveColumns] = useState([]);
   const [showTable, setShowTable] = useState(false);
+
+  // memoize columns and data for react-table
+  const allColumns = useMemo(() => handleQuery({type: 'select', columns: '*'}, allWorksheets), [allWorksheets]);
+  const data = useMemo(() => {
+    return Object.values(allWorksheets).reduce((prev: any, cur: any) => {
+      return prev.concat(cur.data)
+    }, [])
+  }, [allWorksheets])
 
   useEffect(() => {
     /**
      * Loads Current sheets and sets current state
      */
-    const getSheet = async () => {
-      
-      setAllWorksheets(await reloadSheets());
-    };
+    const getSheet = async () => setAllWorksheets(await reloadSheets());
     getSheet();
-
   }, []);
 
   const onSubmit = async () => {
@@ -34,7 +37,9 @@ export default (): JSX.Element => {
     try {
       const parser = new Parser();
       const { ast } = parser.parse(query);
-      handleQuery(ast, allWorksheets); // return columns and data for react table
+      const queryHeaders = handleQuery(ast, allWorksheets); // return columns and data for react table
+
+      console.log('idk',queryHeaders)
 
       setShowTable(true);
     } catch (err) {
@@ -47,19 +52,19 @@ export default (): JSX.Element => {
  
 
   return (
+    <>
     <Querybox onSubmit={onSubmit} />
-
-    //   {showTable ? <QueryTable columns={columns} data={data} /> : null}
-    //   <button
-    //     onClick={() => {
-    //       setShowTable(false);
-    //       (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "";
-    //     }}
-    //   >
-    //     CLEAR
-    //   </button>
-    //   {showTable ? <button>COPY</button> : null}
-    // </div>
+      {showTable ? <QueryTable columns={allColumns} data={data} /> : null}
+      <button
+        onClick={() => {
+          setShowTable(false);
+          (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "";
+        }}
+      >
+        CLEAR
+      </button>
+      {showTable ? <button>COPY</button> : null}
+    </>
   );
 };
 

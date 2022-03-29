@@ -15,7 +15,7 @@ export default (props: any) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
   return (
-    <>
+    <div id="query-table">
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any) => (
@@ -42,6 +42,6 @@ export default (props: any) => {
           })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
