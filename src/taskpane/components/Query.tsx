@@ -1,46 +1,64 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Parser } from "node-sql-parser";
+import { Parser } from "node-sql-parser"; // Used for onSubmit
 import Querybox from "./query/Querybox";
-import QueryTable from "./query/QueryTable";
-import { ColumnFilter } from "./query/ColumnFilter";
-import reloadSheets from "./query/queryFunctions/reloadSheets";
+import QueryTable from "./query/QueryTable"; // reactTable
+import reloadSheets from "./query/queryFunctions/reloadSheets"; // sets allWorksheets with useEffect
 import handleQuery from "./query/queryFunctions/handleQuery";
 
-/* global Excel JSX console document */
+/* global JSX console document */
 
 export default (): JSX.Element => {
-  const [allWorksheets, setAllWorksheets] = useState({});
+  //see allWorkSheets object in references
+  const [allWorksheets, setAllWorksheets] = useState<any>({});
+  // hide or show the queryTable
   const [showTable, setShowTable] = useState(false);
 
-  // memoize columns and data for react-table
-  const allColumns = useMemo(() => handleQuery({type: 'select', columns: '*'}, allWorksheets), [allWorksheets]);
-  const data = useMemo(() => {
-    return Object.values(allWorksheets).reduce((prev: any, cur: any) => {
-      return prev.concat(cur.data)
-    }, [])
-  }, [allWorksheets])
+  /**
+   * use memoize so that the sheet does not re-render unless [allWorksheets] has changed
+   * iterate through the allWorkSheets object and assign to allColumns
+   */
+  const allColumns: any = useMemo(
+    (): any => Object.values(allWorksheets).reduce((prev: any, cur: any) => prev.concat(cur.headerInfo), []),
+    [allWorksheets]
+  );
 
+  /**
+   * memoizing table data for react-table
+   */
+  const data = useMemo(
+    () => Object.values(allWorksheets).reduce((prev: any, cur: any) => prev.concat(cur.data), []),
+    [allWorksheets]
+  );
+  /**
+   * ourTable renders the allColumns and data into the react table
+   */
+  const ourTable = useMemo(() => <QueryTable columns={allColumns} data={data} />, [allWorksheets]);
+
+  /**
+   * Loads Current sheets and sets current state
+   */
   useEffect(() => {
-    /**
-     * Loads Current sheets and sets current state
-     */
     const getSheet = async () => setAllWorksheets(await reloadSheets());
     getSheet();
   }, []);
-
+  /**
+   * on Submit reads the query
+   * if sql query is invalid -> it console.logs invalid query
+   *
+   */
   const onSubmit = async () => {
     // get query from input text
-    const query = (document.getElementById("sqlQueryBox") as HTMLInputElement).value
-
-    // attempt to fix column names if possible
+    const query = (document.getElementById("sqlQueryBox") as HTMLInputElement).value;
 
     try {
       const parser = new Parser();
       const { ast } = parser.parse(query);
-      const { queryHeaders, queryConditions } = handleQuery(ast, allWorksheets); // return columns and data for react table
+      console.log("ast:", ast);
 
-      console.log('queryHeaders:',queryHeaders)
-      console.log('conditions:', queryConditions)
+      const { queryHeaders, queryConditions } = handleQuery(ast, allWorksheets); // return columns and queryContitions (WHERE)
+
+      console.log("queryHeaders:", queryHeaders);
+      console.log("conditions:", queryConditions);
 
       setShowTable(true);
     } catch (err) {
@@ -50,12 +68,10 @@ export default (): JSX.Element => {
     }
   };
 
- 
-
   return (
     <>
-    <Querybox onSubmit={onSubmit} />
-      {showTable ? <QueryTable columns={allColumns} data={data} /> : null}
+      <Querybox onSubmit={onSubmit} />
+      {showTable ? ourTable : null}
       <button
         onClick={() => {
           setShowTable(false);

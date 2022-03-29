@@ -1,6 +1,7 @@
 import React from "react";
 import { useTable, useFilters } from "react-table";
 
+/* global */
 export default (props: any) => {
   const { columns, data } = props;
 
@@ -12,31 +13,20 @@ export default (props: any) => {
     useFilters
   );
 
-  const { 
-    getTableProps, 
-    getTableBodyProps, 
-    headerGroups, 
-    rows, 
-    prepareRow, 
-    allColumns,
-  } = tableInstance;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns } = tableInstance;
 
-  
   return (
     <div id="query-table">
       <div>
         <div>
-          {
-            allColumns.map((column: any) => (
-              <div key={column.id}>
-                <label>
-                  <input type='checkbox' {...column.getToggleHiddenProps()} />
-                  {console.log('what even is this????', column.getToggleHiddenProps())}
-                  {column.Header}
-                </label>
-              </div>
-            ))
-          }
+          {allColumns.map((column: any) => (
+            <div key={column.id}>
+              <label>
+                <input id={column.id} type="checkbox" {...column.getToggleHiddenProps()} />
+                {column.Header}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
       <table {...getTableProps()}>
