@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Parser } from "node-sql-parser"; // Used for onSubmit
 import Querybox from "./query/Querybox";
 import QueryTable from "./query/QueryTable"; // reactTable
 import reloadSheets from "./query/queryFunctions/reloadSheets"; // sets allWorksheets with useEffect
 import handleQuery from "./query/queryFunctions/handleQuery";
+import hideColumns from "./query/queryFunctions/hideColumns";
 
 /* global JSX console document */
 
@@ -32,7 +33,7 @@ export default (): JSX.Element => {
   /**
    * ourTable renders the allColumns and data into the react table
    */
-  const ourTable = useMemo(() => <QueryTable columns={allColumns} data={data} />, [allWorksheets]);
+  const ourTable = useMemo(() => <QueryTable columns={allColumns} data={data}/>, [allWorksheets]);
 
   /**
    * Loads Current sheets and sets current state
@@ -59,8 +60,10 @@ export default (): JSX.Element => {
 
       console.log("queryHeaders:", queryHeaders);
       console.log("conditions:", queryConditions);
-
       setShowTable(true);
+
+      // QueryTable.ourFunction({ queryHeaders, allColumns });
+
     } catch (err) {
       console.log("Invalid query:", err);
       setShowTable(false);
@@ -71,7 +74,8 @@ export default (): JSX.Element => {
   return (
     <>
       <Querybox onSubmit={onSubmit} />
-      {showTable ? ourTable : null}
+      {/* {showTable ? ourTable : null} */}
+      {ourTable}
       <button
         onClick={() => {
           setShowTable(false);

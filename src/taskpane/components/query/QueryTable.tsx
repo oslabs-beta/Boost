@@ -1,8 +1,8 @@
 import React from "react";
 import { useTable, useFilters } from "react-table";
 
-/* global */
-export default (props: any) => {
+/* global console */
+export default (props: any): any => {
   const { columns, data } = props;
 
   const tableInstance: any = useTable(
@@ -15,6 +15,24 @@ export default (props: any) => {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns } = tableInstance;
 
+  // type hideColumnsProps = {
+  //   queryHeaders: any;
+  //   allColumns: any;
+  // };
+
+  // const ourFunction = ({ queryHeaders, allColumns }: hideColumnsProps) => {
+  //   const columnIDs: any = {};
+
+  //   for (const headerInfo of queryHeaders) {
+  //     columnIDs[headerInfo.accessor] = true;
+  //     console.log("columnIDs ", columnIDs[headerInfo.accessor]);
+  //   }
+
+  //   allColumns.map((column: any) => {
+  //     column.toggleHidden(columnIDs[column.id]);
+  //   });
+  // };
+
   return (
     <div id="query-table">
       <div>
@@ -22,7 +40,8 @@ export default (props: any) => {
           {allColumns.map((column: any) => (
             <div key={column.id}>
               <label>
-                <input id={column.id} type="checkbox" {...column.getToggleHiddenProps()} />
+                <input id={`check${column.id}`} type="checkbox" {...column.getToggleHiddenProps()} />
+                {console.log(column.getToggleHiddenProps().onChange)}
                 {column.Header}
               </label>
             </div>
