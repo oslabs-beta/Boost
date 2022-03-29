@@ -1,6 +1,6 @@
 import { ColumnFilter } from "../ColumnFilter";
 
-/* global Excel  */
+/* global Excel console*/
 
 export default async (): Promise<any> => {
   return await Excel.run(async (context: Excel.RequestContext): Promise<any> => {
@@ -64,7 +64,7 @@ export default async (): Promise<any> => {
       /**
        * headerArray - Creating array list of just the headers, index accessor and Column Filter
        */
-      const headerArray = range.values[0].map((column: string, i: number) => {
+      const headerArray = range.values[0].map((column: string) => {
         return { Header: column, accessor: `${accessorValue++}`, Filter: ColumnFilter };
       });
 
@@ -88,8 +88,7 @@ export default async (): Promise<any> => {
 
     // use newWorksheet to load react-table
 
-    console.log('newWorksheet:', newWorksheet)
+    console.log("newWorksheet:", newWorksheet);
     return newWorksheet;
   });
-  
 };

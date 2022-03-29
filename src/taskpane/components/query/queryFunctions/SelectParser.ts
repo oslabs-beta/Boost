@@ -1,49 +1,59 @@
-import { ColumnFilter } from "../ColumnFilter";
+/* global  console */
 
 type astType = {
-  columns: any
-  from: any
-  where: any
-}
+  columns: any;
+  from: any;
+  where: any;
+  groupby: any;
+  orderby: any;
+  having: any;
+};
 
 /**
  * Get all headers selected in the query
  */
-export default ({ columns, from, where }: astType, allWorksheets: any) => {
-  // return all headers from all worksheets
-  if (columns === '*') return Object.values(allWorksheets).reduce((prev: any, cur: any) => prev.concat(cur.headerInfo), [])
-  
+export default ({ columns, from, where, groupby, orderby, having }: astType, allWorksheets: any) => {
   // get the headers for the tables that are requested in FROM arguments
-  const queryHeaders: any = [];
+  let queryHeaders: any = [];
 
   // Create an object will all requested columns if it is not *
   const objWithColumns: any = {};
-  for (const column of columns) {
-    objWithColumns[column.expr.column] = true;
+  if (columns === "*") {
+    objWithColumns["*"] = true;
+  } else {
+    for (const column of columns) {
+      objWithColumns[column.expr.column] = true;
+    }
   }
 
-
-
   for (const fromObj of from) {
-    // make sure that the table they are looking for is in 
+    // make sure that the table they are looking for is in
     if (allWorksheets[fromObj.table]) {
-      const headersArray = allWorksheets[fromObj.table].headerInfo
-      console.log('headers array', headersArray);
+      const headersArray = allWorksheets[fromObj.table].headerInfo;
 
-      for (const headerInfo of headersArray) {
-        if (objWithColumns[headerInfo.Header]) queryHeaders.push(headerInfo)
+      if (objWithColumns["*"]) {
+        queryHeaders = queryHeaders.concat(headersArray);
+      } else {
+        for (const headerInfo of headersArray) {
+          if (objWithColumns[headerInfo.Header]) queryHeaders.push(headerInfo);
+        }
       }
     }
   }
 
-  console.log('where', where)
-  // if there is no where or there is only 1 condition then return it in an array
-  let queryConditions = [where]
-  if (where?.value) queryConditions = where.value
+  // here is only 1 condition then return it in an array
+  let queryConditions = {
+    where: [where],
+    groupby: groupby,
+    orderby: orderby,
+    having: having,
+  };
+  if (where?.value) queryConditions = where.value;
+
+  console.log("headers, conditions", queryHeaders, queryConditions);
 
   return { queryHeaders, queryConditions };
-}
-
+};
 
 // export default async (ast: any, columns: any, setColumns: any) => {
 //   if (ast.columns === "*") {
