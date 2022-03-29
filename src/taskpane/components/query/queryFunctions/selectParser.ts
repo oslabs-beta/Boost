@@ -8,6 +8,8 @@ type astType = {
   orderby: any;
   having: any;
 };
+
+
 /**
  * Get all headers selected in the query
  */
@@ -15,7 +17,7 @@ export default ({ columns, from, where, groupby, orderby, having }: astType, all
   // get the headers for the tables that are requested in FROM arguments
   let queryHeaders: any = [];
 
-  // Create an object will all requested columns if it is not *
+  // Create an object will to hold requested columns with O(1) lookup time
   const objWithColumns: any = {};
   if (columns === "*") {
     objWithColumns["*"] = true;
@@ -24,6 +26,7 @@ export default ({ columns, from, where, groupby, orderby, having }: astType, all
       objWithColumns[column.expr.column] = true;
     }
   }
+  
   for (const fromObj of from) {
     // make sure that the table they are looking for is in
     if (allWorksheets[fromObj.table]) {

@@ -1,5 +1,5 @@
 /* global */
-import selectParser from "./selectParser";
+import SelectParser from "./selectParser";
 
 export default (ast: any, allWorksheets: any): any => {
   // ast will be an array of objects if the sql query ends in a semi colon or there are multiple queries
@@ -7,6 +7,6 @@ export default (ast: any, allWorksheets: any): any => {
 
   switch (ast.type) {
     case "select":
-      return selectParser(ast, allWorksheets);
+      return SelectParser(ast, allWorksheets);
   }
 };
