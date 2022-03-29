@@ -48,6 +48,9 @@ export default async (): Promise<any> => {
 
     await context.sync();
 
+    // keep track of accessor value
+    let accessorValue = 0;
+
     /**
      * iterating through all the sheets in the workbook
      * range contains all the data and the headers
@@ -62,7 +65,7 @@ export default async (): Promise<any> => {
        * headerArray - Creating array list of just the headers, index accessor and Column Filter
        */
       const headerArray = range.values[0].map((column: string, i: number) => {
-        return { Header: column, accessor: `${i}`, Filter: ColumnFilter };
+        return { Header: column, accessor: `${accessorValue++}`, Filter: ColumnFilter };
       });
 
       /**
@@ -83,7 +86,10 @@ export default async (): Promise<any> => {
       };
     }
 
+    // use newWorksheet to load react-table
+
+    console.log('newWorksheet:', newWorksheet)
     return newWorksheet;
   });
-  // setAllWorksheets();
+  
 };
