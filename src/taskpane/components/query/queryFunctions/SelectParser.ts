@@ -25,7 +25,6 @@ export default ({ columns, from, where, groupby, orderby, having }: astType, all
       objWithColumns[column.expr.column] = true;
     }
   }
-
   for (const fromObj of from) {
     // make sure that the table they are looking for is in
     if (allWorksheets[fromObj.table]) {
