@@ -3,17 +3,18 @@ import { ColumnFilter } from "../ColumnFilter";
 type astType = {
   columns: any
   from: any
+  where: any
 }
 
 /**
  * Get all headers selected in the query
  */
-export default ({ columns, from }: astType, allWorksheets: any) => {
+export default ({ columns, from, where }: astType, allWorksheets: any) => {
   // return all headers from all worksheets
   if (columns === '*') return Object.values(allWorksheets).reduce((prev: any, cur: any) => prev.concat(cur.headerInfo), [])
   
   // get the headers for the tables that are requested in FROM arguments
-  const headers: any = [];
+  const queryHeaders: any = [];
 
   // Create an object will all requested columns if it is not *
   const objWithColumns: any = {};
@@ -30,11 +31,17 @@ export default ({ columns, from }: astType, allWorksheets: any) => {
       console.log('headers array', headersArray);
 
       for (const headerInfo of headersArray) {
-        if (objWithColumns[headerInfo.Header]) headers.push(headerInfo)
+        if (objWithColumns[headerInfo.Header]) queryHeaders.push(headerInfo)
       }
     }
   }
-  return headers;
+
+  console.log('where', where)
+  // if there is no where or there is only 1 condition then return it in an array
+  let queryConditions = [where]
+  if (where?.value) queryConditions = where.value
+
+  return { queryHeaders, queryConditions };
 }
 
 

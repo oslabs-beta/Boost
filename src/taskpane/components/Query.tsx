@@ -37,9 +37,10 @@ export default (): JSX.Element => {
     try {
       const parser = new Parser();
       const { ast } = parser.parse(query);
-      const queryHeaders = handleQuery(ast, allWorksheets); // return columns and data for react table
+      const { queryHeaders, queryConditions } = handleQuery(ast, allWorksheets); // return columns and data for react table
 
-      console.log('idk',queryHeaders)
+      console.log('queryHeaders:',queryHeaders)
+      console.log('conditions:', queryConditions)
 
       setShowTable(true);
     } catch (err) {
