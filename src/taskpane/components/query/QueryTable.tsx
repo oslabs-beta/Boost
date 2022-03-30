@@ -7,6 +7,9 @@ let prevHiddenColumns: any = [];
 export default (props: any): any => {
   const { columns, data, hiddenColumns } = props;
 
+  console.log('table columns', columns)
+  console.log('table data', data)
+
   const tableInstance: any = useTable(
     {
       columns,
