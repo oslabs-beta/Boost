@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTable, useFilters } from "react-table";
 
 /* global console */
+let prevHiddenColumns: any = [];
+
 export default (props: any): any => {
-  const { columns, data } = props;
+  const { columns, data, hiddenColumns } = props;
 
   const tableInstance: any = useTable(
     {
       columns,
       data,
+      initialState: {
+        hiddenColumns: hiddenColumns,
+      },
     },
     useFilters
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns } = tableInstance;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns, setHiddenColumns } = tableInstance;
+
+  useEffect(() => {
+    if (JSON.stringify(prevHiddenColumns) != JSON.stringify(hiddenColumns)) {
+      prevHiddenColumns = hiddenColumns;
+      setHiddenColumns(hiddenColumns);
+    }
+  }, []);
+
 
   // type hideColumnsProps = {
   //   queryHeaders: any;
@@ -41,7 +54,6 @@ export default (props: any): any => {
             <div key={column.id}>
               <label>
                 <input id={`check${column.id}`} type="checkbox" {...column.getToggleHiddenProps()} />
-                {console.log(column.getToggleHiddenProps().onChange)}
                 {column.Header}
               </label>
             </div>

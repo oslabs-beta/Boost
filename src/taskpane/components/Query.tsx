@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Parser } from "node-sql-parser"; // Used for onSubmit
 import Querybox from "./query/Querybox";
 import QueryTable from "./query/QueryTable"; // reactTable
 import reloadSheets from "./query/queryFunctions/reloadSheets"; // sets allWorksheets with useEffect
 import handleQuery from "./query/queryFunctions/handleQuery";
 import hideColumns from "./query/queryFunctions/hideColumns";
+// import hideColumns from "./query/queryFunctions/hideColumns";
 
 /* global JSX console document */
 
@@ -13,6 +14,7 @@ export default (): JSX.Element => {
   const [allWorksheets, setAllWorksheets] = useState<any>({});
   // hide or show the queryTable
   const [showTable, setShowTable] = useState(false);
+  const [value, setValue] = useState<Array<string>>([]);
 
   /**
    * use memoize so that the sheet does not re-render unless [allWorksheets] has changed
@@ -33,7 +35,10 @@ export default (): JSX.Element => {
   /**
    * ourTable renders the allColumns and data into the react table
    */
-  const ourTable = useMemo(() => <QueryTable columns={allColumns} data={data}/>, [allWorksheets]);
+  const ourTable = useMemo(
+    () => <QueryTable columns={allColumns} data={data} hiddenColumns={value} />,
+    [allWorksheets]
+  );
 
   /**
    * Loads Current sheets and sets current state
@@ -60,10 +65,11 @@ export default (): JSX.Element => {
 
       console.log("queryHeaders:", queryHeaders);
       console.log("conditions:", queryConditions);
-      setShowTable(true);
+      await setShowTable(true);
+
+      hideColumns(queryHeaders, allColumns);
 
       // QueryTable.ourFunction({ queryHeaders, allColumns });
-
     } catch (err) {
       console.log("Invalid query:", err);
       setShowTable(false);
