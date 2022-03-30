@@ -29,9 +29,9 @@ export default (queryHeaders: any, allColumns: any) => {
 
   for (const column of allColumns) {
     const checkbox = document.getElementById(`check${column.accessor}`) as HTMLInputElement;
-    checkbox.checked = columnIDs[column.accessor];
-    console.log('checkbox ' + column?.accessor + ' ' + checkbox?.checked)
-    const event = new Event("change");
+    checkbox.checked = !columnIDs[column.accessor];
+    // console.log('checkbox ' + column?.accessor + ' ' + checkbox?.checked)
+    const event = new MouseEvent("click", { "bubbles": true });
     checkbox.dispatchEvent(event);
   }
 };
