@@ -28,7 +28,7 @@ export default (): JSX.Element => {
   /**
    * memoizing table data for react-table
    */
-  const data = useMemo(
+  const data: any = useMemo(
     () => Object.values(allWorksheets).reduce((prev: any, cur: any) => prev.concat(cur.data), []),
     [allWorksheets]
   );
@@ -36,7 +36,7 @@ export default (): JSX.Element => {
    * ourTable renders the allColumns and data into the react table
    */
   const ourTable = useMemo(
-    () => <QueryTable columns={allColumns} data={data} hiddenColumns={value} />,
+    () => <QueryTable columns={allColumns} data={data.slice(0,20)} hiddenColumns={value} />,
     [allWorksheets]
   );
 
