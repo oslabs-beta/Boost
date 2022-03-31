@@ -9,12 +9,13 @@ import hideColumns from "./query/queryFunctions/hideColumns";
 
 /* global JSX console document */
 
+const ROWS_LOADED = 20;
+
 export default (): JSX.Element => {
   //see allWorkSheets object in references
   const [allWorksheets, setAllWorksheets] = useState<any>({});
   // hide or show the queryTable
   const [showTable, setShowTable] = useState(false);
-  const [value, setValue] = useState<Array<string>>([]);
 
   /**
    * use memoize so that the sheet does not re-render unless [allWorksheets] has changed
@@ -33,30 +34,73 @@ export default (): JSX.Element => {
     [allWorksheets]
   );
   /**
-   * ourTable renders the allColumns and data into the react table
+   * ourTable renders the allColumns and data into the react table, 50 values hardcoded
    */
+
+  const [currRow, setCurrRow] = useState<any>([7]);
   const ourTable = useMemo(
-    () => <QueryTable columns={allColumns} data={data.slice(0,20)} hiddenColumns={value} />,
-    [allWorksheets]
+    () => <QueryTable columns={allColumns} data={data.slice(currRow[0] - ROWS_LOADED, currRow[0])} />,
+    [currRow]
   );
+  console.log("table :", ourTable);
+
+  const getCurrRow = () => currRow[0];
 
   /**
    * Loads Current sheets and sets current state
    */
   useEffect(() => {
-    const getSheet = async () => setAllWorksheets(await reloadSheets());
+    const getSheet = async () => {
+      const updatedSheet = await reloadSheets();
+      setAllWorksheets(updatedSheet);
+      setCurrRow(() => {
+        console.log("setting currRow");
+        return ROWS_LOADED;
+      });
+
+      const table = document.getElementById("query-table") as HTMLElement;
+
+      table.addEventListener("scroll", () => {
+        if (table.scrollTop > table.scrollHeight - 500) {
+          scrollDown();
+        }
+        console.log("scrolling up:", table.scrollTop, getCurrRow());
+        if (table.scrollTop < 10 && currRow > ROWS_LOADED) {
+          scrollUp();
+        }
+      });
+
+      const scrollDown = () => {
+        table.scrollTop = table.scrollTop - 100;
+        setCurrRow((prev: any): any => [(prev[0] += 3)]);
+      };
+
+      const scrollUp = () => {
+        setCurrRow((prev: any): any => [(prev[0] -= 3)]);
+      };
+    };
     getSheet();
   }, []);
+
+  useEffect(() => {
+    console.log("inside currRow use effect:", currRow);
+  }, [currRow]);
+
   /**
    * on Submit reads the query
    * if sql query is invalid -> it console.logs invalid query
    *
    */
+
+  // needs to be after the table is loaded
+
   const onSubmit = async () => {
-    // get query from input text
-    const query = (document.getElementById("sqlQueryBox") as HTMLInputElement).value;
+    console.log("scroll top:", (document.getElementById("query-table") as HTMLElement).scrollTop);
+    console.log("div height:", (document.getElementById("query-table") as HTMLElement).scrollHeight);
 
     try {
+      // get query from input text
+      const query = (document.getElementById("sqlQueryBox") as HTMLInputElement).value;
       const parser = new Parser();
       const { ast } = parser.parse(query);
       console.log("ast:", ast);
@@ -81,7 +125,6 @@ export default (): JSX.Element => {
     <>
       <Querybox onSubmit={onSubmit} />
       {/* {showTable ? ourTable : null} */}
-      {ourTable}
       <button
         onClick={() => {
           setShowTable(false);
@@ -91,6 +134,7 @@ export default (): JSX.Element => {
         CLEAR
       </button>
       {showTable ? <button>COPY</button> : null}
+      {ourTable}
     </>
   );
 };
@@ -181,3 +225,22 @@ export default (): JSX.Element => {
 //     </div>
 //   );
 // };
+
+/*
+import { useAsyncDebounce } from 'react-table'
+export const GlobalFilter = ({ filter, setFilter }) => {
+  const [value, setvalue] useState(filter) 
+  const onChange useAsyncDebounce((value) => {
+    setFilter(value || undefined)
+ }, 1000)
+  return (
+    <span>
+      Search:{' '}
+      Binput
+        value={value || '}
+        onChange={(e) => {
+           setvalue(e.target.value)
+          onChange(e.target.value)
+        }}
+
+*/

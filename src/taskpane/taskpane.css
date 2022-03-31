@@ -14,7 +14,8 @@
  
  #query-table {
      overflow: auto;
-     height: 500px;
+     height: 400px;
+     margin-right: 20px;
  }
 
  table {

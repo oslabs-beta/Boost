@@ -1,57 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTable, useFilters } from "react-table";
 
-/* global console */
-let prevHiddenColumns: any = [];
-
+/* global */
 export default (props: any): any => {
-  const { columns, data, hiddenColumns } = props;
+  const { columns, data } = props;
 
-  console.log('table columns', columns)
-  console.log('table data', data)
+  // console.log("table columns", columns);
+  // console.log("table data", data);
 
   const tableInstance: any = useTable(
     {
       columns,
       data,
-      initialState: {
-        hiddenColumns: hiddenColumns,
-      },
     },
     useFilters
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns, setHiddenColumns } = tableInstance;
-
-  useEffect(() => {
-    if (JSON.stringify(prevHiddenColumns) != JSON.stringify(hiddenColumns)) {
-      prevHiddenColumns = hiddenColumns;
-      setHiddenColumns(hiddenColumns);
-    }
-  }, []);
-
-
-  // type hideColumnsProps = {
-  //   queryHeaders: any;
-  //   allColumns: any;
-  // };
-
-  // const ourFunction = ({ queryHeaders, allColumns }: hideColumnsProps) => {
-  //   const columnIDs: any = {};
-
-  //   for (const headerInfo of queryHeaders) {
-  //     columnIDs[headerInfo.accessor] = true;
-  //     console.log("columnIDs ", columnIDs[headerInfo.accessor]);
-  //   }
-
-  //   allColumns.map((column: any) => {
-  //     column.toggleHidden(columnIDs[column.id]);
-  //   });
-  // };
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns } = tableInstance;
 
   return (
     <div id="query-table">
-      <div>
+      <div style={{ display: "none" }}>
         <div>
           {allColumns.map((column: any) => (
             <div key={column.id}>

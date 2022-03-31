@@ -8,7 +8,6 @@ export default (props: any): JSX.Element => {
 
   return (
     <div>
-      <h3>Navigation Bar</h3>
       <button onClick={() => setPage(<Query />)}>Query</button>
       <button onClick={() => setPage(<IDE />)}>TS IDE</button>
       <button onClick={() => setPage("visual")}>Visuals</button>

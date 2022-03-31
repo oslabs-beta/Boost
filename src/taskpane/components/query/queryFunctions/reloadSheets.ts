@@ -51,6 +51,8 @@ export default async (): Promise<any> => {
     // keep track of accessor value
     let accessorValue = 0;
 
+    let data: any = [];
+
     /**
      * iterating through all the sheets in the workbook
      * range contains all the data and the headers
@@ -71,7 +73,16 @@ export default async (): Promise<any> => {
       /**
        * dataArray - Removing index 0 (headers), all the data except the headers
        */
-      const dataArray = range.values.slice(1);
+      if (!data.length) {
+        data = range.values.slice(1);
+      } else {
+        const { values } = range;
+        for (let i = 0; i < data.length; i++) {
+          data[i] = data[i].concat(values[i + 1]);
+        }
+      }
+
+      // const dataArray = range.values.slice(1);
 
       // console.log('range:', range.name)
       // console.log('header array:', headerArray)
@@ -82,9 +93,11 @@ export default async (): Promise<any> => {
        */
       newWorksheet[sheet.name] = {
         headerInfo: headerArray,
-        data: dataArray,
+        data,
       };
     }
+
+    // newWorksheet.rabbit = data;
 
     // use newWorksheet to load react-table
 
