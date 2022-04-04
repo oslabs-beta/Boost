@@ -11,7 +11,7 @@ export default (): JSX.Element => {
   // see allWorkSheets object in references
   const [allWorksheets, setAllWorksheets] = useState<any>({});
   // hide or show the copy button
-  const [showCopyButton, setShowCopyButton] = useState(false);
+  const [showTable, setShowTable] = useState(false);
   // hold the table
   const [currTable, setCurrTable] = useState<any>(<QueryTable columns={null} data={null} />);
 
@@ -32,21 +32,25 @@ export default (): JSX.Element => {
    * if sql query is invalid -> it console.logs invalid query
    */
   const onSubmit = async () => {
+    const query = document.getElementById("sqlQueryBox") as HTMLInputElement;
     try {
       // get query ast from input text
-      const query = (document.getElementById("sqlQueryBox") as HTMLInputElement).value;
       const parser = new Parser();
-      const { ast } = parser.parse(query);
+      const { ast } = parser.parse(query.value);
 
       // return relected columns
       const { queryHeaders, queryData } = handleQuery(ast, allWorksheets);
 
-      setShowCopyButton(true); // setting this is what causes the table to rerender, someone please tell me why
+      setShowTable(true); // setting this is what causes the table to rerender, someone please tell me why
       // render the table with the relavent data
       setCurrTable(<QueryTable columns={queryHeaders} data={queryData} />);
     } catch (err) {
       console.log("Query failed:", err);
-      setShowCopyButton(false);
+      // query.setAttribute("style","text-decoration-style: wavy;")
+      // query.style.textDecorationStyle = "wavy";
+      query.setAttribute("class", "incorrect");
+      console.log("query class", query.getAttribute("class"));
+      setShowTable(false);
     }
   };
 
@@ -55,14 +59,14 @@ export default (): JSX.Element => {
       <Querybox onSubmit={onSubmit} />
       <button
         onClick={() => {
-          setShowCopyButton(false);
+          setShowTable(false);
           (document.getElementById("sqlQueryBox") as HTMLInputElement).value = "";
         }}
       >
         CLEAR
       </button>
-      {showCopyButton ? <button>COPY</button> : null}
-      {showCopyButton ? currTable : null}
+      {showTable ? <button>COPY</button> : null}
+      {showTable ? currTable : null}
     </>
   );
 };
