@@ -1,62 +1,68 @@
-import React from "react";
-import { useTable, useFilters } from "react-table";
+import React, { useEffect, useMemo, useState } from "react";
 
-/* global */
+/* global console */
 export default (props: any): any => {
   const { columns, data } = props;
 
-  // console.log("table columns", columns);
-  // console.log("table data", data);
+  if (!columns) return <table></table>;
 
-  const tableInstance: any = useTable(
-    {
-      columns,
-      data,
-    },
-    useFilters
-  );
+  const header = useMemo(() => {
+    return (
+      <thead>
+        <tr>
+          {columns.map((column: any, i: number) => (
+            <th className={`column${i}`} key={`column${i}`}>
+              {column.header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+    );
+  }, [columns]);
+  const [tableRows, setTableRows] = useState<any>([]);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, allColumns } = tableInstance;
+  useEffect(() => {
+    setTableRows([]);
+  }, [columns, data]);
+
+  // add to table rows in sets of 100 so that the initial data loads quicker
+  useEffect(() => {
+    let i = tableRows.length;
+    let d = i * columns.length;
+    let arr: any = [];
+
+    const LOAD_SIZE = 100;
+    const limit = data.length - i < LOAD_SIZE ? data.length : i + LOAD_SIZE;
+
+    console.log("limit:", limit);
+
+    while (i < limit) {
+      const rowInfo = data[i];
+
+      const row: any = (
+        <tr className={`row${i}`} key={`row${i}`}>
+          {rowInfo.map((data: any, j: number) => {
+            return (
+              <td className={`column${j}`} key={`data${d++}`}>
+                {data}
+              </td>
+            );
+          })}
+        </tr>
+      );
+
+      arr.push(row);
+      i++;
+    }
+
+    if (arr.length) setTableRows((prev: any) => prev.concat(arr));
+  }, [tableRows]);
 
   return (
     <div id="query-table">
-      <div style={{ display: "none" }}>
-        <div>
-          {allColumns.map((column: any) => (
-            <div key={column.id}>
-              <label>
-                <input id={`check${column.id}`} type="checkbox" {...column.getToggleHiddenProps()} />
-                {column.Header}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup: any) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps()}>
-                  {column.render("Header")}
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row: any) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell: any) => {
-                  return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
+      <table>
+        {header}
+        <tbody>{tableRows}</tbody>
       </table>
     </div>
   );
