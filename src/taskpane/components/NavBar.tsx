@@ -9,7 +9,7 @@ export default (): JSX.Element => {
   const { setPage } = useContext(Contexts);
 
   return (
-    <div>
+    <div id="navbar">
       <button onClick={() => setPage(<Query />)}>Query</button>
       <button onClick={() => setPage(<IDE />)}>TS IDE</button>
       <button onClick={() => setPage("visual")}>Visuals</button>

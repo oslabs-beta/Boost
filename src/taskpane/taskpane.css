@@ -11,6 +11,9 @@
      padding: 0 5px;
      /* background-color: blue; */
  }
+ .hidden {
+  display: none;
+ }
  
  #query-table {
      overflow: auto;
@@ -46,6 +49,43 @@ textarea {
     height: 100px;
     margin: auto;
 }
+
+.incorrect {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: red; 
+  text-decoration-thickness: 2px;
+}
+
+#navbar {
+  margin: 10px 10px;
+}
+
+#navbar button {
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: white;
+  background-color: #00c2cb;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+#navbar button:hover {
+  color:#000000;
+  background-color:#455757;
+}
+
+button {
+  font-size: 15px;
+}
+
 
 .pane {
   height: 50vh;
