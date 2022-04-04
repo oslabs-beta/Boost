@@ -1,10 +1,12 @@
-import React from "react";
+/* global JSX */
+import React, { useContext } from "react";
 import Query from "./Query";
 import IDE from "./IDE";
 import Database from "./Database";
+import { Contexts } from "./Contexts";
 
-export default (props: any): JSX.Element => {
-  const { setPage } = props;
+export default (): JSX.Element => {
+  const { setPage } = useContext(Contexts);
 
   return (
     <div>

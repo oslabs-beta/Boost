@@ -28,14 +28,17 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "@codemirror/lint": "^0.19.6",
     "@fluentui/react": "^8.34.0",
     "@types/react-table": "^7.7.10",
+    "codemirror": "^5.65.2",
     "core-js": "^3.9.1",
     "css-loader": "^6.7.1",
     "es6-promise": "^4.2.8",
     "node-sql-parser": "^4.3.0",
     "pg": "^8.7.3",
     "react": "^16.8.2",
+    "react-codemirror2": "^7.2.1",
     "react-dom": "^16.8.2",
     "react-hot-loader": "^4.13.0",
     "react-table": "^7.7.0",
@@ -45,6 +48,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/codemirror": "^5.60.5",
     "@types/custom-functions-runtime": "^1.6.0",
     "@types/office-js": "^1.0.180",
     "@types/office-runtime": "^1.0.17",
