@@ -37,14 +37,14 @@ export default (): JSX.Element => {
    * ourTable renders the allColumns and data into the react table, 50 values hardcoded
    */
 
-  const [currRow, setCurrRow] = useState<any>([7]);
+  const [currRow, setCurrRow] = useState<any>(0);
   const ourTable = useMemo(
-    () => <QueryTable columns={allColumns} data={data.slice(currRow[0] - ROWS_LOADED, currRow[0])} />,
+    () => <QueryTable columns={allColumns} data={data.slice(currRow - ROWS_LOADED, currRow)} />,
     [currRow]
   );
   console.log("table :", ourTable);
 
-  const getCurrRow = () => currRow[0];
+  // const getCurrRow = () => currRow[0];
 
   /**
    * Loads Current sheets and sets current state
@@ -64,20 +64,20 @@ export default (): JSX.Element => {
         if (table.scrollTop > table.scrollHeight - 500) {
           scrollDown();
         }
-        console.log("scrolling up:", table.scrollTop, getCurrRow());
-        if (table.scrollTop < 10 && currRow > ROWS_LOADED) {
-          scrollUp();
-        }
+        // console.log("scrolling up:", table.scrollTop, getCurrRow());
+        // if (table.scrollTop < 10 && currRow > ROWS_LOADED) {
+        //   scrollUp();
+        // }
       });
 
       const scrollDown = () => {
         table.scrollTop = table.scrollTop - 100;
-        setCurrRow((prev: any): any => [(prev[0] += 3)]);
+        setCurrRow((prev: any): any => (prev += 3));
       };
 
-      const scrollUp = () => {
-        setCurrRow((prev: any): any => [(prev[0] -= 3)]);
-      };
+      // const scrollUp = () => {
+      //   setCurrRow((prev: any): any => [(prev[0] -= 3)]);
+      // };
     };
     getSheet();
   }, []);
