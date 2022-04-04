@@ -1,5 +1,3 @@
-import { ColumnFilter } from "../ColumnFilter";
-
 /* global Excel console*/
 
 export default async (): Promise<any> => {
@@ -16,7 +14,7 @@ export default async (): Promise<any> => {
      * TYPES FOR Worksheet Object
      */
     type headerType = {
-      Header: string;
+      header: string;
       Accessor: string;
       Filter: any;
     };
@@ -51,43 +49,56 @@ export default async (): Promise<any> => {
     // keep track of accessor value
     let accessorValue = 0;
 
+    // hold all headers and data in the workbook
+    let _headers: any = [];
+    let _data: any = []; // rows need to account for blank space
+
     /**
      * iterating through all the sheets in the workbook
      * range contains all the data and the headers
      * sheet has the name of the current worksheet
      */
     for (const info of infoArray) {
-      const sheet = info[0]; // Retrieving sheet info (refer to line 58)
-      const range = info[1]; // Retrieving range info (refer to line 58)
-      // console.log("outer values: ", info.values);
+      // get sheet and range info for each sheet
+      const sheet = info[0];
+      const range = info[1];
 
       /**
        * headerArray - Creating array list of just the headers, index accessor and Column Filter
        */
       const headerArray = range.values[0].map((column: string) => {
-        return { Header: column, accessor: `${accessorValue++}`, Filter: ColumnFilter };
+        const curHeader = { table: sheet.name, header: column, accessor: `${accessorValue++}` };
+        _headers.push(curHeader);
+        return curHeader;
       });
 
       /**
-       * dataArray - Removing index 0 (headers), all the data except the headers
+       * hold all the data from all sheets
        */
-      const dataArray = range.values.slice(1);
-
-      // console.log('range:', range.name)
-      // console.log('header array:', headerArray)
-      // console.log('data array:', dataArray)
+      if (!_data.length) {
+        _data = range.values.slice(1);
+      } else {
+        const { values } = range;
+        if (_data.length > values.length) {
+          for (let i = 0; i < _data.length; i++) {
+            _data[i] = _data[i].concat(values[i + 1]);
+          }
+        }
+      }
 
       /**
        * Adding a new sheet to workbook
        */
       newWorksheet[sheet.name] = {
         headerInfo: headerArray,
-        data: dataArray,
+        data: range.values.slice(1),
       };
     }
 
-    // use newWorksheet to load react-table
+    newWorksheet._headers = _headers;
+    newWorksheet._data = _data;
 
+    // use newWorksheet to load react-table
     console.log("newWorksheet:", newWorksheet);
     return newWorksheet;
   });
