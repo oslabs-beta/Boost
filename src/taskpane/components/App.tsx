@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Query from "./Query";
 import "../taskpane.css";
-
+import { Contexts } from "./Contexts";
 /* global JSX */
 
 /*
@@ -26,12 +26,14 @@ https://docs.microsoft.com/en-us/office/dev/add-ins/excel/excel-add-ins-workshee
  */
 export default (): JSX.Element => {
   const [page, setPage] = useState(<Query />);
+  const [js, setJs] = useState("");
 
   return (
     <div>
-      {/* <QueryRefactored /> */}
-      <NavBar setPage={setPage} />
-      {page}
+      <Contexts.Provider value={{ js, setJs, setPage }}>
+        <NavBar />
+        {page}
+      </Contexts.Provider>
     </div>
   );
 };
