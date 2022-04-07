@@ -11,6 +11,7 @@
     "npm": ">=6 <9"
   },
   "scripts": {
+    "test": "jest",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "dev-server": "webpack serve --mode development",
@@ -48,8 +49,11 @@
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/preset-typescript": "^7.13.0",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/react": "^12.1.4",
     "@types/codemirror": "^5.60.5",
     "@types/custom-functions-runtime": "^1.6.0",
+    "@types/jest": "^27.4.1",
     "@types/office-js": "^1.0.180",
     "@types/office-runtime": "^1.0.17",
     "@types/react": "^16.14.24",
@@ -67,6 +71,7 @@
     "file-loader": "^6.2.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.5.1",
     "jsdoc": "^3.6.10",
     "less": "^3.9.0",
     "less-loader": "^10.0.1",
@@ -80,6 +85,7 @@
     "process": "^0.11.10",
     "request": "^2.88.2",
     "source-map-loader": "^3.0.0",
+    "ts-jest": "^27.1.4",
     "ts-loader": "^9.2.5",
     "typescript": "^4.3.5",
     "webpack": "^5.50.0",
