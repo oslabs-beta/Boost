@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-/* global console */
+/* global console document */
 export default (props: any): any => {
   const { columns, data } = props;
 
@@ -22,17 +22,15 @@ export default (props: any): any => {
   const [tableRows, setTableRows] = useState<any>([]);
 
   useEffect(() => {
-    setTableRows([]);
+    loadTableRows();
   }, [columns, data]);
 
-  // add to table rows in sets of 100 so that the initial data loads quicker
-  useEffect(() => {
+  const loadTableRows = () => {
     let i = tableRows.length;
     let d = i * columns.length;
     let arr: any = [];
 
-    const LOAD_SIZE = 100;
-    const limit = data.length - i < LOAD_SIZE ? data.length : i + LOAD_SIZE;
+    const limit = data.length - i < 100 ? data.length : i + 100;
 
     console.log("limit:", limit);
 
@@ -55,11 +53,19 @@ export default (props: any): any => {
       i++;
     }
 
-    if (arr.length) setTableRows((prev: any) => prev.concat(arr));
-  }, [tableRows]);
+    if (arr.length) {
+      setTableRows((prev: any) => prev.concat(arr));
+    }
+  };
+
+  const scrollFunction = (e: any) => {
+    const { scrollTop } = e.target;
+    const { offsetHeight } = document.querySelector("table") as HTMLTableElement;
+    if (offsetHeight < scrollTop + 1000) loadTableRows();
+  };
 
   return (
-    <div id="query-table">
+    <div id="query-table" onScroll={(e) => scrollFunction(e)}>
       <table>
         {header}
         <tbody>{tableRows}</tbody>

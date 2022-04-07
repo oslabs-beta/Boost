@@ -4,7 +4,7 @@ import { QueryBoxProps } from "src/types";
 /* global JSX document */
 
 export default (props: QueryBoxProps): JSX.Element => {
-  const str: string = "SELECT five, one, Region, Population, Country FROM thousand, world_population, test";
+  const str: string = "SELECT population FROM world_population";
   return (
     <>
       <textarea
