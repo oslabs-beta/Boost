@@ -31,7 +31,7 @@ export default (): JSX.Element => {
    * on Submit reads the query
    * if sql query is invalid -> it console.logs invalid query
    */
-  const onSubmit = async () => {
+  const onSubmit = () => {
     const query = document.getElementById("sqlQueryBox") as HTMLInputElement;
     try {
       // get query ast from input text

@@ -4,7 +4,7 @@ import { Column } from "react-table"
 
 // Props
 export type QueryBoxProps = {
-  onSubmit: () => Promise<void>
+  onSubmit: () => any
 }
 
 export type QueryTableProps = {
