@@ -1,20 +1,21 @@
 ![](/) 
 
+# About Us
 Boost Excel
 
-# Installation 
-Please download spearmint from our [website](\). Available for Mac OS.
 
+# Getting Started
 
-# How to use in development mode
+## Installation
 
-### For Mac developers
-
-**Prerequisite**: Install Microsoft Excel version 16 and up.
+**Prerequisite**: Install Microsoft Excel Desktop version 16 and up.
 
 1. Fork and clone this repository.
 2. ```npm install```
 3. ```npm start```
+
+## Technologies
+[Excel](https://www.microsoft.com/en-us/microsoft-365/excel) | [Excel JS API](https://docs.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview) | [React](https://reactjs.org/) | [React Hooks](https://reactjs.org/docs/hooks-intro.html) |  [Typescript](https://www.typescriptlang.org/) | [CodeMirror](https://codemirror.net/) [Jest](https://jestjs.io/)
 
 ***
 
@@ -65,7 +66,7 @@ Please download spearmint from our [website](\). Available for Mac OS.
 The following is a list of features + improvements for future open-source developers that the Spearmint team has either started or would like to see implemented. Or, if you have additional new ideas, feel free to implement those as well! 
 
 Query:
-- Implementing JOIN clause for Querying 
+- Implementing **JOIN** clause for Querying 
 - Handling invalid/duplicate names in Query input
 - Row management in the Query table
 
@@ -76,3 +77,5 @@ Custom Functions
 Other: 
 - React Hooks testing
 - Containerization with Docker
+
+
