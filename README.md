@@ -15,6 +15,14 @@
 ## About Us
 Boost Excel
 
+## Features
+
+📝 **Reading and writing from multiple sheets to query table**
+
+💪 **Ability to use custom functions directly in Excel**
+
+***
+<br>
 
 ## Getting Started
 
@@ -30,7 +38,6 @@ Boost Excel
 [Excel](https://www.microsoft.com/en-us/microsoft-365/excel) | [Excel JS API](https://docs.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview) | [React](https://reactjs.org/) | [React Hooks](https://reactjs.org/docs/hooks-intro.html) |  [Typescript](https://www.typescriptlang.org/) | [SQL](https://www.postgresql.org/) | [CodeMirror](https://codemirror.net/) | [Jest](https://jestjs.io/)
 
 ***
-
 <br>
 
 ## How it works
@@ -42,14 +49,6 @@ Boost Excel
 
 ![](/)
 
-## Features
-
-📝 **Reading and writing from multiple sheets to query table**
-
-💪 **Ability to use custom functions directly in Excel**
-
-
-
 <br>
 
 ## Demos
@@ -58,8 +57,8 @@ Boost Excel
 ![](/)
 
 
+***
 <br>
-
 
 ## The Boost Team
 <hr>
@@ -73,7 +72,7 @@ Boost Excel
 
 ***
 
-## If You Want To Contribute: 
+## If You Want To Contribute
 The following is a list of features + improvements for future open-source developers that the Boost team has either started or would like to see implemented. If you have additional new ideas, feel free to implement those as well! Much appreciated. 
 
 Query:
