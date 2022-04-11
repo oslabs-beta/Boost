@@ -72,7 +72,12 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 
 ***
 
-## If You Want To Contribute
+## If You Want To Contribute!
+
+If you found this interesting or helpful at all, feel free to drop a :star: [![GitHub stars](https://img.shields.io/github/stars/oslabs-beta/Boost?style=social&label=Star&)](https://github.com/oslabs-beta/Boost/stargazers) :star: on this project to show your support!
+
+All bugs, tasks or enhancements are tracked as <a href="https://github.com/oslabs-beta/Boost/issues">GitHub issues</a>. 
+
 The following is a list of features + improvements for future open-source developers that the Boost team has either started or would like to see implemented. If you have additional new ideas, feel free to implement those as well! Much appreciated. 
 
 Query:
