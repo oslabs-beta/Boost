@@ -13,7 +13,7 @@
 <h2 align="center">Simple Excel Add-in Querying Tool</h2>
 
 ## About Us
-Team launched Boost, a Microsoft Excel Add-in to help developers import large excel workbooks into their database using SQL queries. Microsoft Excel has more than 30 million users and is the most popular spreadsheet application on the market. It is one of Microsoft’s core products since Excel’s release in 1985 and it has a new user every five minutes.
+Boost is a Microsoft Excel Add-in to help developers import large excel workbooks into their database using SQL queries. Microsoft Excel has more than 30 million users and is the most popular spreadsheet application on the market. It is one of Microsoft’s core products since Excel’s release in 1985 and it has a new user every five minutes.
 
 ## Features
 
