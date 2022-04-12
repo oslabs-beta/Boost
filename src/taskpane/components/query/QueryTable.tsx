@@ -22,7 +22,8 @@ export default (props: any): any => {
   const [tableRows, setTableRows] = useState<any>([]);
 
   useEffect(() => {
-    loadTableRows();
+    setTableRows([]);
+    setTimeout(() => loadTableRows(), 100);
   }, [columns, data]);
 
   const loadTableRows = () => {
