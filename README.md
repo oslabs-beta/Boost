@@ -1,4 +1,4 @@
-![](/assets/boost_banner.png) 
+![](/assets/boost-banner.png) 
 <!-- <p align="center">
  <img src="./kafka_sprout_logo_v3.svg" width="400" height="320">
 </p> -->
