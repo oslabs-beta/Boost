@@ -22,11 +22,11 @@ export default (props: any): any => {
   const [tableRows, setTableRows] = useState<any>([]);
 
   useEffect(() => {
-    loadTableRows();
+    setTableRows([]);
+    loadTableRows(0);
   }, [columns, data]);
 
-  const loadTableRows = () => {
-    let i = tableRows.length;
+  const loadTableRows = (i = tableRows.length) => {
     let d = i * columns.length;
     let arr: any = [];
 
