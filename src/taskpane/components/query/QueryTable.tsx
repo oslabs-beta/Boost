@@ -23,11 +23,10 @@ export default (props: any): any => {
 
   useEffect(() => {
     setTableRows([]);
-    setTimeout(() => loadTableRows(), 100);
+    loadTableRows(0);
   }, [columns, data]);
 
-  const loadTableRows = () => {
-    let i = tableRows.length;
+  const loadTableRows = (i = tableRows.length) => {
     let d = i * columns.length;
     let arr: any = [];
 
