@@ -42,9 +42,8 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 
  ## How it works
 
+<img src="/assets/boost-demo-square" width=""> />
 
-![](/assets/boost-demo-ver_test.gif)
-![](/assets/boost-demo-wide-test.gif)
 <!--
 7. The latest version of Spearmint adopted testing capability for Vue.js. The [Vue Test Utils](https://vu8e-test-utils.vuejs.org/) library has been utilized to test your **Vue.js** application. 
 
