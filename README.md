@@ -10,7 +10,7 @@
   <img src="https://travis-ci.org/boennemann/badges.svg?branch=master" /> 
 </p>
 
-<h2 align="center">Simple Excel Add-in Querying Tool</h2>
+<h2 align="center">Simple Excel Add-in Querying Tool and Custom TypeScript Function Creator</h2>
 
 ## About Us
 Boost is a Microsoft Excel Add-in to help developers import large excel workbooks into their database using SQL queries. Microsoft Excel has more than 30 million users and is the most popular spreadsheet application on the market. It is one of Microsoft’s core products since Excel’s release in 1985 and it has a new user every five minutes.
@@ -40,22 +40,19 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 ***
 <br>
 
-<!-- ## How it works
+ ## How it works
 
+### How to open
+1. Go to the ribbon **INSERT**, **Add-Ins**. Click on Boost and head back to **HOME** to open. 
+<img src="/assets/boost-demo-1.gif" width="800px" />
 
-![](/public/demos/snyk-test-app.gif)
+### Querying
+2. Click on the **Query** tab in the add-in to utilize the querying feature. Query across multiple worksheets in your Excel application.
+<img src="/assets/boost-demo-2.gif" width="800" />
 
-7. The latest version of Spearmint adopted testing capability for Vue.js. The [Vue Test Utils](https://vu8e-test-utils.vuejs.org/) library has been utilized to test your **Vue.js** application. 
-
-![](/)
-
-<br>
-
-## Demos
-
-### Demo Title Here
-![](/)
- -->
+### Custom Function Creations
+3. Click on the **IDE** tab to create and save customized TypeScript functions. 
+<img src="/assets/boost-demo-3.gif" width="800" />
 
 ***
 <br>
