@@ -42,20 +42,17 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 
  ## How it works
 
-<img src="/assets/boost-demo-square" width=""> />
+### How to open
+1. Go to the ribbon **INSERT**, **Add-Ins**. Click on Boost and head back to **HOME** to open. 
+<img src="/assets/boost-demo-1" width=""> />
 
-<!--
-7. The latest version of Spearmint adopted testing capability for Vue.js. The [Vue Test Utils](https://vu8e-test-utils.vuejs.org/) library has been utilized to test your **Vue.js** application. 
+### Querying
+2. Click on the **Query** tab in the add-in to utilize the querying feature. Query across multiple worksheets in your Excel application.
+<img src="/assets/boost-demo-2" width=""> />
 
-![](/)
-
-<br>
-
-## Demos
-
-### Demo Title Here
-![](/)
- -->
+### Custom Function Creations
+3. Click on the **IDE** tab to create and save customized TypeScript functions. 
+<img src="/assets/boost-demo-3" width=""> />
 
 ***
 <br>
