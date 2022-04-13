@@ -19,7 +19,7 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 
 📝 **Reading and writing from multiple sheets to query table**
 
-💪 **Ability to use custom functions directly in Excel**
+💪 **Ability to write and use custom functions directly in Excel with TypeScript**
 
 ***
 <br>
