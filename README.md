@@ -44,7 +44,7 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 
 ### How to open
 1. Go to the ribbon **INSERT**, **Add-Ins**. Click on Boost and head back to **HOME** to open. 
-<img src="/assets/boost-demo-1.gif" width="" />
+<img src="/assets/boost-demo-1.gif" width="600px" />
 
 ### Querying
 2. Click on the **Query** tab in the add-in to utilize the querying feature. Query across multiple worksheets in your Excel application.
