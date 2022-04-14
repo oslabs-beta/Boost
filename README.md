@@ -10,7 +10,7 @@
   <img src="https://travis-ci.org/boennemann/badges.svg?branch=master" /> 
 </p>
 
-<h2 align="center">Simple Excel Add-in Querying Tool and Custom TypeScript Function Creator</h2>
+<h2 align="center">Microsoft Excel for Developers</h2>
 
 ## About Us
 Boost is a Microsoft Excel Add-in to help developers import large excel workbooks into their database using SQL queries. Microsoft Excel has more than 30 million users and is the most popular spreadsheet application on the market. It is one of Microsoft’s core products since Excel’s release in 1985 and it has a new user every five minutes.
