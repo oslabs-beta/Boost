@@ -44,15 +44,15 @@ Boost is a Microsoft Excel Add-in to help developers import large excel workbook
 
 ### How to open
 1. Go to the ribbon **INSERT**, **Add-Ins**. Click on Boost and head back to **HOME** to open. 
-<img src="/assets/boost-demo-1.gif" width="800px" />
+<img src="/assets/boost-demo-1_1.5x.gif" width="800px" />
 
 ### Querying
 2. Click on the **Query** tab in the add-in to utilize the querying feature. Query across multiple worksheets in your Excel application.
-<img src="/assets/boost-demo-2.gif" width="800" />
+<img src="/assets/boost-demo-2_1.5x.gif" width="800" />
 
 ### Custom Function Creations
 3. Click on the **IDE** tab to create and save customized TypeScript functions. 
-<img src="/assets/boost-demo-3.gif" width="800" />
+<img src="/assets/boost-demo-3_1.5x.gif" width="800" />
 
 ***
 <br>
