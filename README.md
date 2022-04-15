@@ -89,6 +89,9 @@ Custom Functions
 Other: 
 - React Hooks testing
 - Containerization with Docker
+- 
+### Contributors
+>Kevin Co []() <br />
 
 ## License
 This project is available under the MIT License.
