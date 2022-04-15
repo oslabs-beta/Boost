@@ -91,7 +91,7 @@ Other:
 - Containerization with Docker
 - 
 ### Contributors
->Kevin Co []() <br />
+>Kevin Co - Logo Designer [@itskevinco](https://www.instagram.com/itskevinco/) <br />
 
 ## License
 This project is available under the MIT License.
