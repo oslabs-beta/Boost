@@ -27,10 +27,12 @@ https://docs.microsoft.com/en-us/office/dev/add-ins/excel/excel-add-ins-workshee
 export default (): JSX.Element => {
   const [page, setPage] = useState(<Query />);
   const [js, setJs] = useState("");
+  const [library, setLibrary] = useState<any>([]);
+  const [index, setIndex] = useState(0);
 
   return (
     <div>
-      <Contexts.Provider value={{ js, setJs, setPage }}>
+      <Contexts.Provider value={{ js, setJs, setPage, library, setLibrary, index, setIndex }}>
         <NavBar />
         {page}
       </Contexts.Provider>
