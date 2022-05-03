@@ -1,5 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Contexts } from "../Contexts";
+
+/* global JSX */
 
 export default (): JSX.Element => {
-  return <div>LIBRARY</div>;
+  const { library } = useContext(Contexts);
+
+  return (
+    <div>
+      <ul>{library}</ul>
+    </div>
+  );
 };
